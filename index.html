@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>One Beautiful Day — Nidhu ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --pink:#e9a6b4;
+    --dark:#2e2630;
+    --cream:#fffaf7;
+    --soft:#f8e9ec;
+    --gold:#d7ae68;
+    --white:#ffffff;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"DM Sans",sans-serif;
+    background:var(--cream);
+    color:var(--dark);
+    overflow-x:hidden;
+}
+
+/* ---------------- BACKGROUND ---------------- */
+
+.background{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:-1;
+}
+
+.blob{
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    filter:blur(70px);
+    opacity:.25;
+    animation:float 10s infinite alternate ease-in-out;
+}
+
+.blob.one{
+    background:#f3b8c4;
+    top:-100px;
+    left:-80px;
+}
+
+.blob.two{
+    background:#f6d7a5;
+    right:-100px;
+    top:35%;
+    animation-delay:2s;
+}
+
+.blob.three{
+    background:#d8c2e8;
+    bottom:-100px;
+    left:30%;
+    animation-delay:4s;
+}
+
+@keyframes float{
+    from{transform:translate(0,0) scale(1)}
+    to{transform:translate(50px,30px) scale(1.15)}
+}
+
+/* ---------------- HERO ---------------- */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px 20px;
+    position:relative;
+}
+
+.hero-content{
+    max-width:800px;
+    animation:fadeUp 1.2s ease;
+}
+
+.eyebrow{
+    letter-spacing:4px;
+    text-transform:uppercase;
+    font-size:12px;
+    color:#9d747f;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-family:"Playfair Display",serif;
+    font-size:clamp(42px,8vw,82px);
+    line-height:1.05;
+    margin-bottom:22px;
+}
+
+.hero h1 span{
+    color:#c87d8d;
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.8;
+    max-width:620px;
+    margin:auto;
+    color:#70636a;
+}
+
+.date-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-top:30px;
+    padding:13px 20px;
+    border-radius:50px;
+    background:white;
+    box-shadow:0 15px 40px rgba(80,40,60,.08);
+}
+
+.scroll{
+    position:absolute;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:12px;
+    color:#9a858c;
+}
+
+/* ---------------- INTRO ---------------- */
+
+.intro{
+    max-width:900px;
+    margin:auto;
+    padding:70px 20px 30px;
+    text-align:center;
+}
+
+.intro h2{
+    font-family:"Playfair Display",serif;
+    font-size:38px;
+    margin-bottom:18px;
+}
+
+.intro p{
+    color:#776c72;
+    line-height:1.8;
+}
+
+/* ---------------- JOURNEY MAP ---------------- */
+
+.map-section{
+    max-width:1100px;
+    margin:60px auto;
+    padding:20px;
+}
+
+.map{
+    position:relative;
+    height:430px;
+    border-radius:35px;
+    overflow:hidden;
+    background:
+        linear-gradient(30deg,transparent 45%,rgba(255,255,255,.6) 46%,transparent 47%),
+        linear-gradient(-25deg,transparent 45%,rgba(255,255,255,.6) 46%,transparent 47%),
+        #eee9e3;
+    box-shadow:0 25px 70px rgba(60,40,50,.12);
+}
+
+/* fake map roads */
+
+.road{
+    position:absolute;
+    background:rgba(255,255,255,.9);
+    height:7px;
+    border-radius:20px;
+    transform-origin:left;
+}
+
+.r1{
+    width:80%;
+    top:30%;
+    left:5%;
+    transform:rotate(12deg);
+}
+
+.r2{
+    width:75%;
+    top:65%;
+    left:15%;
+    transform:rotate(-10deg);
+}
+
+.r3{
+    width:65%;
+    top:45%;
+    left:20%;
+    transform:rotate(55deg);
+}
+
+.r4{
+    width:50%;
+    top:20%;
+    left:42%;
+    transform:rotate(75deg);
+}
+
+/* animated route */
+
+.route{
+    position:absolute;
+    width:72%;
+    height:4px;
+    background:linear-gradient(90deg,#d78b9b,#d5ae6c);
+    top:52%;
+    left:13%;
+    border-radius:10px;
+    transform:rotate(-7deg);
+    animation:routeGlow 2s infinite alternate;
+}
+
+@keyframes routeGlow{
+    from{box-shadow:0 0 5px rgba(215,139,155,.3)}
+    to{box-shadow:0 0 20px rgba(215,139,155,.7)}
+}
+
+.map-point{
+    position:absolute;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+    box-shadow:0 8px 25px rgba(50,30,40,.18);
+    cursor:pointer;
+    transition:.3s;
+    z-index:5;
+}
+
+.map-point:hover{
+    transform:scale(1.18);
+}
+
+.map-point::after{
+    content:"";
+    position:absolute;
+    inset:-7px;
+    border:2px solid rgba(215,139,155,.35);
+    border-radius:50%;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(.8);opacity:1}
+    100%{transform:scale(1.5);opacity:0}
+}
+
+.p1{left:8%;top:45%}
+.p2{left:27%;top:37%}
+.p3{left:43%;top:48%}
+.p4{left:57%;top:43%}
+.p5{left:72%;top:56%}
+.p6{left:86%;top:45%}
+
+.map-label{
+    position:absolute;
+    background:rgba(255,255,255,.9);
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:11px;
+    box-shadow:0 5px 20px rgba(50,30,40,.08);
+}
+
+.l1{left:7%;top:62%}
+.l2{left:25%;top:27%}
+.l3{left:41%;top:62%}
+.l4{left:55%;top:28%}
+.l5{left:70%;top:69%}
+.l6{right:3%;top:30%}
+
+/* ---------------- TIMELINE ---------------- */
+
+.timeline{
+    max-width:850px;
+    margin:90px auto;
+    padding:20px;
+    position:relative;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:0;
+    bottom:0;
+    width:2px;
+    background:linear-gradient(#e8b5c0,#d9b36f,#e8b5c0);
+}
+
+.event{
+    width:50%;
+    padding:20px 35px;
+    position:relative;
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s;
+}
+
+.event.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.event:nth-child(odd){
+    left:0;
+    text-align:right;
+}
+
+.event:nth-child(even){
+    left:50%;
+}
+
+.event-dot{
+    position:absolute;
+    width:17px;
+    height:17px;
+    border-radius:50%;
+    background:#d98e9d;
+    border:4px solid white;
+    box-shadow:0 0 0 3px #edc5cd;
+    top:28px;
+}
+
+.event:nth-child(odd) .event-dot{
+    right:-9px;
+}
+
+.event:nth-child(even) .event-dot{
+    left:-9px;
+}
+
+.time{
+    font-size:13px;
+    color:#b27a87;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-bottom:8px;
+}
+
+.card{
+    background:rgba(255,255,255,.85);
+    padding:23px;
+    border-radius:24px;
+    box-shadow:0 15px 40px rgba(60,35,50,.08);
+    backdrop-filter:blur(12px);
+    cursor:pointer;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 50px rgba(60,35,50,.14);
+}
+
+.icon{
+    font-size:29px;
+    margin-bottom:10px;
+}
+
+.card h3{
+    font-family:"Playfair Display",serif;
+    font-size:22px;
+    margin-bottom:7px;
+}
+
+.card p{
+    color:#756970;
+    font-size:14px;
+    line-height:1.7;
+}
+
+.quote{
+    margin-top:12px;
+    font-family:"Playfair Display",serif;
+    font-style:italic;
+    color:#9d6e7b;
+}
+
+/* ---------------- OPTION SECTION ---------------- */
+
+.options{
+    max-width:900px;
+    margin:100px auto;
+    padding:20px;
+}
+
+.options h2{
+    text-align:center;
+    font-family:"Playfair Display",serif;
+    font-size:38px;
+    margin-bottom:35px;
+}
+
+.option-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+
+.option{
+    padding:35px;
+    border-radius:30px;
+    background:white;
+    box-shadow:0 20px 50px rgba(50,30,40,.08);
+    transition:.4s;
+}
+
+.option:hover{
+    transform:translateY(-8px);
+}
+
+.option h3{
+    font-family:"Playfair Display",serif;
+    font-size:26px;
+    margin-bottom:12px;
+}
+
+.option p{
+    color:#746a70;
+    line-height:1.7;
+}
+
+.option button{
+    border:0;
+    background:#d98e9d;
+    color:white;
+    padding:12px 18px;
+    border-radius:30px;
+    margin-top:20px;
+    cursor:pointer;
+}
+
+/* ---------------- FINAL ---------------- */
+
+.final{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px 20px;
+    background:
+        radial-gradient(circle at 50% 20%,#f8dce2,transparent 35%),
+        var(--cream);
+}
+
+.final-content{
+    max-width:750px;
+}
+
+.final .heart{
+    font-size:65px;
+    animation:heartbeat 1.6s infinite;
+}
+
+@keyframes heartbeat{
+    0%,100%{transform:scale(1)}
+    15%{transform:scale(1.15)}
+    30%{transform:scale(1)}
+}
+
+.final h2{
+    font-family:"Playfair Display",serif;
+    font-size:clamp(40px,7vw,70px);
+    margin:20px 0;
+}
+
+.final p{
+    color:#746a70;
+    font-size:17px;
+    line-height:1.9;
+}
+
+.final-quote{
+    margin-top:30px;
+    font-family:"Playfair Display",serif;
+    font-size:23px;
+    color:#9b6875;
+}
+
+.signature{
+    margin-top:40px;
+    font-family:"Playfair Display",serif;
+    font-size:20px;
+}
+
+/* ---------------- MODAL ---------------- */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(35,25,32,.45);
+    backdrop-filter:blur(8px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:100;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-box{
+    background:white;
+    max-width:500px;
+    width:100%;
+    padding:35px;
+    border-radius:30px;
+    text-align:center;
+    animation:modalIn .4s ease;
+}
+
+@keyframes modalIn{
+    from{transform:scale(.85);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+.close{
+    float:right;
+    border:0;
+    background:none;
+    font-size:25px;
+    cursor:pointer;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media(max-width:700px){
+
+    .timeline::before{
+        left:18px;
+    }
+
+    .event,
+    .event:nth-child(even),
+    .event:nth-child(odd){
+        width:100%;
+        left:0;
+        text-align:left;
+        padding-left:50px;
+        padding-right:5px;
+    }
+
+    .event:nth-child(odd) .event-dot,
+    .event:nth-child(even) .event-dot{
+        left:10px;
+        right:auto;
+    }
+
+    .option-grid{
+        grid-template-columns:1fr;
+    }
+
+    .map{
+        height:360px;
+    }
+
+    .map-label{
+        font-size:9px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+    <div class="blob three"></div>
+</div>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<div class="eyebrow">A day worth remembering</div>
+
+<h1>
+One Beautiful Day<br>
+Before <span>Bangalore</span> ❤️
+</h1>
+
+<p>
+Tomorrow isn't just another day.
+It's one beautiful little chapter before
+Nidhu begins her Bangalore internship journey.
+45 days may feel long...
+but beautiful memories don't have an expiry date.
+</p>
+
+<div class="date-badge">
+🌷 Tomorrow • Our Chennai Day
+</div>
+
+</div>
+
+<div class="scroll">
+↓ Scroll slowly — the journey begins
+</div>
+
+</section>
+
+
+<!-- INTRO -->
+
+<section class="intro">
+
+<h2>Tomorrow's Little Adventure ✨</h2>
+
+<p>
+From the first train in the morning to the final goodbye at Medavakkam Tank,
+every destination has a tiny story waiting to happen.
+No rushing the moments.
+No checking the clock too much.
+Just two people, one beautiful day,
+and a lot of memories.
+</p>
+
+</section>
+
+
+<!-- MAP -->
+
+<section class="map-section">
+
+<div class="map">
+
+<div class="road r1"></div>
+<div class="road r2"></div>
+<div class="road r3"></div>
+<div class="road r4"></div>
+
+<div class="route"></div>
+
+<div class="map-point p1" onclick="openPlace('Pallavaram')">🚆</div>
+<div class="map-point p2" onclick="openPlace('Aerohub Mall')">🛍️</div>
+<div class="map-point p3" onclick="openPlace('Guindy')">🚆</div>
+<div class="map-point p4" onclick="openPlace('Sangeetha Restaurant')">🍽️</div>
+<div class="map-point p5" onclick="openPlace('Marina / Sai Baba Temple')">🌊</div>
+<div class="map-point p6" onclick="openPlace('Chennai Fort')">📍</div>
+
+<div class="map-label l1">Pallavaram</div>
+<div class="map-label l2">Aerohub Mall</div>
+<div class="map-label l3">Guindy</div>
+<div class="map-label l4">Lunch</div>
+<div class="map-label l5">Evening</div>
+<div class="map-label l6">Fort</div>
+
+</div>
+
+</section>
+
+
+<!-- TIMELINE -->
+
+<section class="timeline">
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">08:00 AM</div>
+
+<div class="card" onclick="openPlace('Nidhu starts her journey')">
+
+<div class="icon">🚆</div>
+
+<h3>The Journey Begins</h3>
+
+<p>
+Nidhu starts her morning train journey.
+A simple beginning to a day that will become a beautiful memory.
+</p>
+
+<div class="quote">
+"Every beautiful day begins with one small step."
+</div>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">09:00 – 09:30 AM</div>
+
+<div class="card">
+
+<div class="icon">📍</div>
+
+<h3>Pallavaram</h3>
+
+<p>
+Nidhu reaches Pallavaram.
+The actual adventure begins here. ❤️
+</p>
+
+<div class="quote">
+"Finally… the day we've been waiting for."
+</div>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">09:35 – 10:30 AM</div>
+
+<div class="card">
+
+<div class="icon">☕</div>
+
+<h3>Relax Café</h3>
+
+<p>
+Slow down.
+Sit together.
+Talk about everything.
+Laugh at random things.
+Create those small moments that somehow become the biggest memories later.
+</p>
+
+<div class="quote">
+"Some conversations become memories without us even realizing it."
+</div>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">10:40 AM</div>
+
+<div class="card">
+
+<div class="icon">🚉</div>
+
+<h3>Pallavaram Railway Station</h3>
+
+<p>
+Time to continue the journey.
+Next stop — Tirusulam.
+</p>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">11:10 AM</div>
+
+<div class="card">
+
+<div class="icon">🚆</div>
+
+<h3>Tirusulam Railway Station</h3>
+
+<p>
+Arrive at Tirusulam and continue toward the next adventure.
+</p>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">11:30 AM – 01:00 PM</div>
+
+<div class="card">
+
+<div class="icon">🛍️</div>
+
+<h3>Aerohub Mall</h3>
+
+<p>
+Explore.
+Eat something.
+Walk around.
+Take pictures.
+Laugh.
+Make the kind of random memories that you'll remember during those 45 days.
+</p>
+
+<div class="quote">
+"Not every memory needs a special occasion."
+</div>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">01:15 PM</div>
+
+<div class="card">
+
+<div class="icon">🚆</div>
+
+<h3>Train Time</h3>
+
+<p>
+Leave the mall and catch the train toward Guindy.
+</p>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">01:40 PM</div>
+
+<div class="card">
+
+<div class="icon">📍</div>
+
+<h3>Guindy Railway Station</h3>
+
+<p>
+Arrive at Guindy and continue toward lunch.
+</p>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">02:10 – 02:50 PM</div>
+
+<div class="card">
+
+<div class="icon">🍛</div>
+
+<h3>Sangeetha — Lunch</h3>
+
+<p>
+Good food.
+Good conversations.
+And probably a few "remember this?" moments.
+</p>
+
+<div class="quote">
+"Food tastes better when the company is special."
+</div>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">03:00 – 03:10 PM</div>
+
+<div class="card">
+
+<div class="icon">🚌</div>
+
+<h3>Guindy Bus Stop</h3>
+
+<p>
+Next destination decision time.
+Choose the afternoon adventure.
+</p>
+
+</div>
+</div>
+
+</section>
+
+
+<!-- OPTIONS -->
+
+<section class="options">
+
+<h2>🌸 The Afternoon Choice</h2>
+
+<div class="option-grid">
+
+<div class="option">
+
+<h3>Option A — Sai Baba Temple 🛕</h3>
+
+<p>
+Because tomorrow is Sai Baba day,
+head toward the Sai Baba Temple in Mylapore
+and spend some peaceful time there.
+</p>
+
+<button onclick="showMessage('Option A selected — A peaceful afternoon with blessings for Nidhu ❤️')">
+Choose Option A
+</button>
+
+</div>
+
+
+<div class="option">
+
+<h3>Option B — Marina Beach 🌊</h3>
+
+<p>
+Catch the bus toward Marina Beach,
+reach around 4:00 PM,
+enjoy the sea breeze and spend the evening together.
+</p>
+
+<button onclick="showMessage('Option B selected — Marina sunset memories activated 🌊❤️')">
+Choose Option B
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CONTINUE TIMELINE -->
+
+<section class="timeline">
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">04:00 – 05:40 PM</div>
+
+<div class="card">
+
+<div class="icon">🌊</div>
+
+<h3>Marina Beach</h3>
+
+<p>
+Walk.
+Talk.
+Sit near the sea.
+Take photos.
+Watch the evening slowly change.
+</p>
+
+<div class="quote">
+"Maybe the sea will remember this day too."
+</div>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">05:50 PM</div>
+
+<div class="card">
+
+<div class="icon">🚆</div>
+
+<h3>Leaving Marina</h3>
+
+<p>
+The evening continues toward Chennai Fort.
+</p>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">06:20 PM</div>
+
+<div class="card">
+
+<div class="icon">📍</div>
+
+<h3>Chennai Fort</h3>
+
+<p>
+Reach Fort and continue toward one final food stop.
+</p>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">06:35 – 07:00 PM</div>
+
+<div class="card">
+
+<div class="icon">🍜</div>
+
+<h3>Burma Noodles Stop</h3>
+
+<p>
+One final famous food stop.
+Enjoy the noodles,
+talk about the day,
+and don't let the clock ruin the moment.
+</p>
+
+<div class="quote">
+"One more bite. One more laugh. One more memory."
+</div>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">07:15 PM</div>
+
+<div class="card">
+
+<div class="icon">🚉</div>
+
+<h3>Fort Railway Station</h3>
+
+<p>
+Back to the station for the final train journey of the day.
+</p>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">07:25 – 07:40 PM</div>
+
+<div class="card">
+
+<div class="icon">🚆</div>
+
+<h3>Fort → Park</h3>
+
+<p>
+Catch the train and reach Park Station.
+</p>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">07:50 PM</div>
+
+<div class="card">
+
+<div class="icon">🚶</div>
+
+<h3>Park Station → Bus Stand</h3>
+
+<p>
+A short walk before the final bus ride.
+</p>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">08:00 PM</div>
+
+<div class="card">
+
+<div class="icon">🚌</div>
+
+<h3>Final Bus Journey</h3>
+
+<p>
+The final ride of this beautiful Chennai day.
+Destination: Medavakkam Tank.
+</p>
+
+</div>
+</div>
+
+
+<div class="event">
+
+<div class="event-dot"></div>
+
+<div class="time">08:30 PM</div>
+
+<div class="card">
+
+<div class="icon">🌙</div>
+
+<h3>Medavakkam Tank</h3>
+
+<p>
+The planned end of our beautiful day.
+Not the end of the memories.
+</p>
+
+<div class="quote">
+"Some days end. Some memories never do."
+</div>
+
+</div>
+</div>
+
+</section>
+
+
+<!-- FINAL MESSAGE -->
+
+<section class="final">
+
+<div class="final-content">
+
+<div class="heart">❤️</div>
+
+<div class="eyebrow">Before you leave for Bangalore</div>
+
+<h2>Dear Nidhu,</h2>
+
+<p>
+Tomorrow isn't really a goodbye.
+
+It's just a little pause before another chapter begins.
+
+Go to Bangalore.
+Learn new things.
+Experience new places.
+Build your career.
+Meet new people.
+Enjoy your internship.
+
+And whenever the days feel long,
+remember that Chennai has one beautiful day
+waiting inside its memories.
+
+45 days will pass.
+
+And when you come back,
+we'll have another day to plan.
+
+Until then...
+
+keep smiling,
+keep growing,
+and keep being you. 🌷
+</p>
+
+<div class="final-quote">
+"Distance can change the place,
+but it doesn't have to change the memories."
+</div>
+
+<div class="signature">
+— From someone who wanted to make tomorrow memorable ❤️
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeModal()">×</button>
+
+<div style="font-size:45px;margin-bottom:15px;">📍</div>
+
+<h2 id="modalTitle"></h2>
+
+<p id="modalText" style="margin-top:15px;line-height:1.7;color:#756970;"></p>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ---------------- SCROLL ANIMATION ---------------- */
+
+const events = document.querySelectorAll(".event");
+
+const observer = new IntersectionObserver(
+(entries)=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add("show");
+        }
+    });
+},
+{
+    threshold:.15
+});
+
+events.forEach(event=>observer.observe(event));
+
+
+/* ---------------- PLACE MODAL ---------------- */
+
+function openPlace(place){
+
+    const title=document.getElementById("modalTitle");
+    const text=document.getElementById("modalText");
+    const modal=document.getElementById("modal");
+
+    const places={
+
+        "Pallavaram":{
+            title:"📍 Pallavaram",
+            text:"09:00 – 09:30 AM • The place where the beautiful day officially begins."
+        },
+
+        "Aerohub Mall":{
+            title:"🛍️ Aerohub Mall",
+            text:"11:30 AM – 01:00 PM • Explore, laugh, eat and create memories."
+        },
+
+        "Guindy":{
+            title:"🚆 Guindy",
+            text:"01:40 PM • Arrive here before heading for lunch."
+        },
+
+        "Sangeetha Restaurant":{
+            title:"🍛 Lunch Time",
+            text:"02:10 – 02:50 PM • Good food + good conversations = perfect combination."
+        },
+
+        "Marina / Sai Baba Temple":{
+            title:"🌸 Afternoon Choice",
+            text:"Around 04:00 PM • Choose between a peaceful Sai Baba Temple visit or Marina Beach."
+        },
+
+        "Chennai Fort":{
+            title:"📍 Chennai Fort",
+            text:"06:20 PM • Evening journey continues from here."
+        },
+
+        "Nidhu starts her journey":{
+            title:"🚆 08:00 AM",
+            text:"Nidhu starts her journey. And with that, one very special Chennai day begins."
+        }
+
+    };
+
+    title.innerText=places[place].title;
+    text.innerText=places[place].text;
+
+    modal.classList.add("active");
+}
+
+
+function closeModal(){
+    document.getElementById("modal").classList.remove("active");
+}
+
+
+document.getElementById("modal").addEventListener("click",(e)=>{
+    if(e.target.id==="modal"){
+        closeModal();
+    }
+});
+
+
+/* ---------------- OPTION MESSAGE ---------------- */
+
+function showMessage(message){
+
+    document.getElementById("modalTitle").innerText="✨ Your Choice";
+    document.getElementById("modalText").innerText=message;
+
+    document.getElementById("modal").classList.add("active");
+}
+
+
+/* ---------------- MAP ROUTE MOVEMENT ---------------- */
+
+const route=document.querySelector(".route");
+
+let routePosition=0;
+
+function animateRoute(){
+
+    routePosition+=0.15;
+
+    if(routePosition>100){
+        routePosition=0;
+    }
+
+    route.style.background=
+        `linear-gradient(
+        90deg,
+        rgba(215,139,155,.3) ${routePosition}%,
+        #d7ae68 ${routePosition+10}%,
+        #d98e9d ${routePosition+20}%,
+        rgba(215,139,155,.3) ${routePosition+30}%
+        )`;
+
+    requestAnimationFrame(animateRoute);
+}
+
+animateRoute();
+
+
+/* ---------------- ESCAPE KEY ---------------- */
+
+document.addEventListener("keydown",(e)=>{
+    if(e.key==="Escape"){
+        closeModal();
+    }
+});
+
+</script>
+
+</body>
+                     </html>
