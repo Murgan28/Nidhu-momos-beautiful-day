@@ -4,21 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>One Beautiful Day — Nidhu ❤️</title>
+<title>One Last Beautiful Day — Nidhu 💗</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
-    --pink:#e9a6b4;
-    --dark:#2e2630;
-    --cream:#fffaf7;
-    --soft:#f8e9ec;
-    --gold:#d7ae68;
+    --pink:#ff4f91;
+    --pink2:#ff78ad;
+    --light:#fff0f6;
+    --soft:#ffd9e8;
+    --deep:#b52f67;
     --white:#ffffff;
+    --text:#54283c;
+    --muted:#8f6878;
+    --glass:rgba(255,255,255,.72);
+    --shadow:0 20px 60px rgba(181,47,103,.15);
 }
 
 *{
@@ -33,1366 +36,2975 @@ html{
 
 body{
     font-family:"DM Sans",sans-serif;
-    background:var(--cream);
-    color:var(--dark);
+    color:var(--text);
+    background:
+        radial-gradient(circle at 10% 5%,#ffe3ef 0,transparent 25%),
+        radial-gradient(circle at 90% 20%,#ffd9e9 0,transparent 25%),
+        linear-gradient(180deg,#fff8fb,#fff0f6 45%,#fff8fb);
     overflow-x:hidden;
 }
 
-/* ---------------- BACKGROUND ---------------- */
-
-.background{
+body:before{
+    content:"";
     position:fixed;
     inset:0;
     pointer-events:none;
-    overflow:hidden;
     z-index:-1;
+    background:
+        radial-gradient(circle at 30% 70%,rgba(255,79,145,.08),transparent 25%),
+        radial-gradient(circle at 80% 80%,rgba(255,174,204,.1),transparent 25%);
 }
 
-.blob{
-    position:absolute;
-    width:300px;
-    height:300px;
+button{
+    font:inherit;
+}
+
+a{
+    color:inherit;
+}
+
+::selection{
+    background:var(--pink);
+    color:white;
+}
+
+/* =========================
+   LOADING / OPEN SCREEN
+========================= */
+
+.intro{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:
+        radial-gradient(circle at center,#ffe5f0,transparent 40%),
+        #fff5f9;
+    transition:1s ease;
+}
+
+.intro.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.intro-inner{
+    width:min(90%,650px);
+}
+
+.intro-flower{
+    width:95px;
+    height:95px;
+    margin:auto auto 25px;
+    display:grid;
+    place-items:center;
     border-radius:50%;
-    filter:blur(70px);
-    opacity:.25;
-    animation:float 10s infinite alternate ease-in-out;
+    font-size:46px;
+    background:white;
+    box-shadow:
+        0 15px 50px rgba(255,79,145,.18),
+        inset 0 0 0 8px #fff2f7;
+    animation:float 3s ease-in-out infinite,
+              pulseGlow 2s infinite;
 }
 
-.blob.one{
-    background:#f3b8c4;
-    top:-100px;
-    left:-80px;
+.intro small{
+    color:var(--deep);
+    letter-spacing:4px;
+    font-size:11px;
+    text-transform:uppercase;
+    font-weight:700;
 }
 
-.blob.two{
-    background:#f6d7a5;
-    right:-100px;
-    top:35%;
-    animation-delay:2s;
+.intro h1{
+    font-family:"Playfair Display",serif;
+    color:#8d3157;
+    font-size:clamp(43px,8vw,78px);
+    line-height:1.05;
+    margin:18px 0;
 }
 
-.blob.three{
-    background:#d8c2e8;
-    bottom:-100px;
-    left:30%;
-    animation-delay:4s;
+.intro p{
+    color:var(--muted);
+    line-height:1.8;
+    font-size:16px;
 }
 
-@keyframes float{
-    from{transform:translate(0,0) scale(1)}
-    to{transform:translate(50px,30px) scale(1.15)}
+.open-btn{
+    margin-top:30px;
+    padding:15px 28px;
+    border:0;
+    border-radius:50px;
+    color:white;
+    background:linear-gradient(135deg,var(--pink),var(--pink2));
+    box-shadow:0 12px 35px rgba(255,79,145,.28);
+    cursor:pointer;
+    transition:.3s;
 }
 
-/* ---------------- HERO ---------------- */
+.open-btn:hover{
+    transform:translateY(-4px) scale(1.03);
+}
+
+/* =========================
+   PAGE PROGRESS
+========================= */
+
+.page-progress{
+    position:fixed;
+    top:0;
+    left:0;
+    height:4px;
+    width:0;
+    z-index:10000;
+    background:linear-gradient(90deg,#ff3e83,#ff9dc4,#ff4f91);
+    box-shadow:0 0 12px rgba(255,79,145,.4);
+}
+
+/* =========================
+   FLOATING PETALS
+========================= */
+
+.petal{
+    position:fixed;
+    top:-30px;
+    pointer-events:none;
+    z-index:5;
+    animation:petalFall linear forwards;
+    opacity:.65;
+}
+
+@keyframes petalFall{
+    0%{
+        transform:translateY(-30px) rotate(0);
+        opacity:0;
+    }
+    15%{
+        opacity:.7;
+    }
+    100%{
+        transform:translateY(110vh) translateX(80px) rotate(420deg);
+        opacity:0;
+    }
+}
+
+/* =========================
+   GLOBAL
+========================= */
+
+.container{
+    width:min(1120px,92%);
+    margin:auto;
+}
+
+section{
+    padding:100px 0;
+    position:relative;
+}
+
+.section-label{
+    color:var(--pink);
+    text-transform:uppercase;
+    letter-spacing:3px;
+    font-size:11px;
+    font-weight:700;
+    margin-bottom:13px;
+}
+
+.section-title{
+    font-family:"Playfair Display",serif;
+    color:#873251;
+    font-size:clamp(37px,6vw,60px);
+    line-height:1.08;
+    margin-bottom:18px;
+}
+
+.section-text{
+    color:var(--muted);
+    max-width:650px;
+    line-height:1.8;
+}
+
+.glass{
+    background:var(--glass);
+    border:1px solid rgba(255,255,255,.9);
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+}
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
     min-height:100vh;
     display:flex;
     align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:40px 20px;
+    padding-top:120px;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:60px;
+    align-items:center;
+}
+
+.hero-kicker{
+    color:var(--pink);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:2px;
+}
+
+.hero h2{
+    font-family:"Playfair Display",serif;
+    color:#7d2e4e;
+    font-size:clamp(55px,8vw,100px);
+    line-height:.95;
+    margin:20px 0 28px;
+}
+
+.hero h2 span{
+    color:var(--pink);
     position:relative;
 }
 
-.hero-content{
-    max-width:800px;
-    animation:fadeUp 1.2s ease;
-}
-
-.eyebrow{
-    letter-spacing:4px;
-    text-transform:uppercase;
-    font-size:12px;
-    color:#9d747f;
-    margin-bottom:20px;
-}
-
-.hero h1{
-    font-family:"Playfair Display",serif;
-    font-size:clamp(42px,8vw,82px);
-    line-height:1.05;
-    margin-bottom:22px;
-}
-
-.hero h1 span{
-    color:#c87d8d;
-}
-
-.hero p{
-    font-size:17px;
-    line-height:1.8;
-    max-width:620px;
-    margin:auto;
-    color:#70636a;
-}
-
-.date-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    margin-top:30px;
-    padding:13px 20px;
-    border-radius:50px;
-    background:white;
-    box-shadow:0 15px 40px rgba(80,40,60,.08);
-}
-
-.scroll{
-    position:absolute;
-    bottom:25px;
-    left:50%;
-    transform:translateX(-50%);
-    font-size:12px;
-    color:#9a858c;
-}
-
-/* ---------------- INTRO ---------------- */
-
-.intro{
-    max-width:900px;
-    margin:auto;
-    padding:70px 20px 30px;
-    text-align:center;
-}
-
-.intro h2{
-    font-family:"Playfair Display",serif;
-    font-size:38px;
-    margin-bottom:18px;
-}
-
-.intro p{
-    color:#776c72;
-    line-height:1.8;
-}
-
-/* ---------------- JOURNEY MAP ---------------- */
-
-.map-section{
-    max-width:1100px;
-    margin:60px auto;
-    padding:20px;
-}
-
-.map{
-    position:relative;
-    height:430px;
-    border-radius:35px;
-    overflow:hidden;
-    background:
-        linear-gradient(30deg,transparent 45%,rgba(255,255,255,.6) 46%,transparent 47%),
-        linear-gradient(-25deg,transparent 45%,rgba(255,255,255,.6) 46%,transparent 47%),
-        #eee9e3;
-    box-shadow:0 25px 70px rgba(60,40,50,.12);
-}
-
-/* fake map roads */
-
-.road{
-    position:absolute;
-    background:rgba(255,255,255,.9);
-    height:7px;
-    border-radius:20px;
-    transform-origin:left;
-}
-
-.r1{
-    width:80%;
-    top:30%;
-    left:5%;
-    transform:rotate(12deg);
-}
-
-.r2{
-    width:75%;
-    top:65%;
-    left:15%;
-    transform:rotate(-10deg);
-}
-
-.r3{
-    width:65%;
-    top:45%;
-    left:20%;
-    transform:rotate(55deg);
-}
-
-.r4{
-    width:50%;
-    top:20%;
-    left:42%;
-    transform:rotate(75deg);
-}
-
-/* animated route */
-
-.route{
-    position:absolute;
-    width:72%;
-    height:4px;
-    background:linear-gradient(90deg,#d78b9b,#d5ae6c);
-    top:52%;
-    left:13%;
-    border-radius:10px;
-    transform:rotate(-7deg);
-    animation:routeGlow 2s infinite alternate;
-}
-
-@keyframes routeGlow{
-    from{box-shadow:0 0 5px rgba(215,139,155,.3)}
-    to{box-shadow:0 0 20px rgba(215,139,155,.7)}
-}
-
-.map-point{
-    position:absolute;
-    width:48px;
-    height:48px;
-    border-radius:50%;
-    background:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:21px;
-    box-shadow:0 8px 25px rgba(50,30,40,.18);
-    cursor:pointer;
-    transition:.3s;
-    z-index:5;
-}
-
-.map-point:hover{
-    transform:scale(1.18);
-}
-
-.map-point::after{
+.hero h2 span:after{
     content:"";
     position:absolute;
-    inset:-7px;
-    border:2px solid rgba(215,139,155,.35);
-    border-radius:50%;
-    animation:pulse 2s infinite;
+    left:0;
+    right:0;
+    bottom:-7px;
+    height:8px;
+    background:url("data:image/svg+xml,%3Csvg width='200' height='15' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 9 Q 50 0 100 9 T198 9' fill='none' stroke='%23ff78ad' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E")
+    center/100% 100% no-repeat;
 }
 
-@keyframes pulse{
-    0%{transform:scale(.8);opacity:1}
-    100%{transform:scale(1.5);opacity:0}
+.hero-description{
+    color:var(--muted);
+    max-width:620px;
+    line-height:1.8;
+    font-size:17px;
 }
 
-.p1{left:8%;top:45%}
-.p2{left:27%;top:37%}
-.p3{left:43%;top:48%}
-.p4{left:57%;top:43%}
-.p5{left:72%;top:56%}
-.p6{left:86%;top:45%}
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
 
-.map-label{
+.hero-btn{
+    text-decoration:none;
+    padding:13px 20px;
+    border-radius:30px;
+    border:1px solid #f3c5d7;
+    background:white;
+    color:var(--deep);
+    transition:.3s;
+}
+
+.hero-btn.primary{
+    color:white;
+    border:0;
+    background:linear-gradient(135deg,var(--pink),var(--pink2));
+}
+
+.hero-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 25px rgba(255,79,145,.16);
+}
+
+/* HERO MEMORY CARD */
+
+.hero-card{
+    min-height:430px;
+    border-radius:38px;
+    padding:30px;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-card:before{
+    content:"";
     position:absolute;
-    background:rgba(255,255,255,.9);
-    padding:7px 12px;
-    border-radius:20px;
-    font-size:11px;
-    box-shadow:0 5px 20px rgba(50,30,40,.08);
+    width:230px;
+    height:230px;
+    border-radius:50%;
+    background:#ffc0d9;
+    filter:blur(35px);
+    top:-80px;
+    right:-70px;
+    opacity:.55;
 }
 
-.l1{left:7%;top:62%}
-.l2{left:25%;top:27%}
-.l3{left:41%;top:62%}
-.l4{left:55%;top:28%}
-.l5{left:70%;top:69%}
-.l6{right:3%;top:30%}
+.hero-card:after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:#ffdce9;
+    filter:blur(35px);
+    bottom:-70px;
+    left:-50px;
+}
 
-/* ---------------- TIMELINE ---------------- */
+.hero-card-inner{
+    position:relative;
+    z-index:2;
+    height:100%;
+    min-height:370px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+}
+
+.hero-heart{
+    position:absolute;
+    top:40px;
+    right:35px;
+    font-size:45px;
+    animation:heartbeat 1.6s infinite;
+}
+
+.hero-icon-circle{
+    width:100px;
+    height:100px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    font-size:48px;
+    background:white;
+    box-shadow:0 15px 40px rgba(181,47,103,.12);
+    margin-bottom:auto;
+}
+
+.hero-card h3{
+    font-family:"Playfair Display",serif;
+    color:#873251;
+    font-size:34px;
+}
+
+.hero-card p{
+    color:var(--muted);
+    line-height:1.7;
+    margin-top:8px;
+}
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message{
+    text-align:center;
+}
+
+.message-box{
+    max-width:850px;
+    margin:40px auto 0;
+    padding:50px;
+    border-radius:35px;
+    position:relative;
+    overflow:hidden;
+}
+
+.message-box:before{
+    content:"❤";
+    position:absolute;
+    font-size:190px;
+    color:#ffb7d2;
+    opacity:.08;
+    right:-15px;
+    bottom:-70px;
+}
+
+.message-box p{
+    position:relative;
+    font-family:"Playfair Display",serif;
+    font-size:clamp(22px,4vw,35px);
+    line-height:1.55;
+    color:#773149;
+}
+
+.signature{
+    margin-top:25px;
+    color:var(--pink);
+    font-weight:600;
+}
+
+/* =========================
+   INTERACTIVE JOURNEY
+========================= */
+
+.route-wrap{
+    margin-top:50px;
+    padding:18px;
+    border-radius:35px;
+}
+
+.route-map{
+    height:450px;
+    border-radius:27px;
+    overflow:hidden;
+    position:relative;
+    background:
+        linear-gradient(rgba(255,120,173,.08) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,120,173,.08) 1px,transparent 1px),
+        #fff8fb;
+    background-size:42px 42px;
+}
+
+.route-map-title{
+    position:absolute;
+    top:20px;
+    left:22px;
+    z-index:3;
+    padding:8px 12px;
+    border-radius:20px;
+    background:white;
+    color:var(--pink);
+    font-size:10px;
+    letter-spacing:2px;
+    box-shadow:0 8px 20px rgba(181,47,103,.08);
+}
+
+.route-svg{
+    width:100%;
+    height:100%;
+}
+
+.route-line{
+    fill:none;
+    stroke:#ff6fa5;
+    stroke-width:6;
+    stroke-linecap:round;
+    stroke-dasharray:12 12;
+    animation:routeDash 3s linear infinite;
+}
+
+@keyframes routeDash{
+    to{
+        stroke-dashoffset:-100;
+    }
+}
+
+.route-moving{
+    fill:#ff3e83;
+    stroke:white;
+    stroke-width:5;
+    filter:drop-shadow(0 3px 7px rgba(255,62,131,.4));
+}
+
+.map-pin{
+    cursor:pointer;
+    transition:.25s;
+}
+
+.map-pin:hover{
+    transform:translateY(-5px) scale(1.12);
+}
+
+.pin-circle{
+    fill:#ff5c97;
+    stroke:white;
+    stroke-width:3;
+}
+
+.pin-label{
+    fill:#81334f;
+    font-size:12px;
+    font-weight:700;
+}
+
+.route-note{
+    text-align:center;
+    margin:15px 0 3px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* =========================
+   TIMELINE
+========================= */
 
 .timeline{
-    max-width:850px;
-    margin:90px auto;
-    padding:20px;
+    margin-top:60px;
     position:relative;
 }
 
-.timeline::before{
+.timeline:before{
     content:"";
     position:absolute;
-    left:50%;
+    left:27px;
     top:0;
     bottom:0;
-    width:2px;
-    background:linear-gradient(#e8b5c0,#d9b36f,#e8b5c0);
+    width:3px;
+    border-radius:10px;
+    background:linear-gradient(#ff78ad,#ffc0d9,transparent);
 }
 
 .event{
-    width:50%;
-    padding:20px 35px;
-    position:relative;
-    opacity:0;
-    transform:translateY(40px);
-    transition:1s;
+    display:grid;
+    grid-template-columns:55px 1fr;
+    gap:20px;
+    margin-bottom:25px;
 }
 
-.event.show{
-    opacity:1;
-    transform:translateY(0);
-}
-
-.event:nth-child(odd){
-    left:0;
-    text-align:right;
-}
-
-.event:nth-child(even){
-    left:50%;
-}
-
-.event-dot{
-    position:absolute;
-    width:17px;
-    height:17px;
+.event-icon{
+    width:55px;
+    height:55px;
     border-radius:50%;
-    background:#d98e9d;
-    border:4px solid white;
-    box-shadow:0 0 0 3px #edc5cd;
-    top:28px;
-}
-
-.event:nth-child(odd) .event-dot{
-    right:-9px;
-}
-
-.event:nth-child(even) .event-dot{
-    left:-9px;
-}
-
-.time{
-    font-size:13px;
-    color:#b27a87;
-    font-weight:700;
-    letter-spacing:1px;
-    margin-bottom:8px;
-}
-
-.card{
-    background:rgba(255,255,255,.85);
-    padding:23px;
-    border-radius:24px;
-    box-shadow:0 15px 40px rgba(60,35,50,.08);
-    backdrop-filter:blur(12px);
-    cursor:pointer;
+    display:grid;
+    place-items:center;
+    font-size:23px;
+    background:white;
+    border:3px solid #ffe1ec;
+    box-shadow:0 8px 25px rgba(181,47,103,.12);
+    z-index:2;
     transition:.3s;
 }
 
-.card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 20px 50px rgba(60,35,50,.14);
+.event:hover .event-icon{
+    transform:rotate(-8deg) scale(1.12);
+    border-color:#ff9fc2;
 }
 
-.icon{
-    font-size:29px;
-    margin-bottom:10px;
+.event-card{
+    padding:23px;
+    border-radius:25px;
+    transition:.35s;
 }
 
-.card h3{
-    font-family:"Playfair Display",serif;
-    font-size:22px;
-    margin-bottom:7px;
+.event-card:hover{
+    transform:translateX(8px);
+    box-shadow:0 20px 45px rgba(181,47,103,.13);
 }
 
-.card p{
-    color:#756970;
+.event-time{
+    color:var(--pink);
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:6px;
+}
+
+.event-title{
+    font-size:19px;
+    font-weight:700;
+    color:#713048;
+}
+
+.event-description{
+    margin-top:7px;
+    color:var(--muted);
+    line-height:1.65;
     font-size:14px;
-    line-height:1.7;
+}
+
+/* =========================
+   VIDEOS
+========================= */
+
+.video-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+    margin-top:55px;
+}
+
+.video-card{
+    padding:12px;
+    border-radius:34px;
+    position:relative;
+    overflow:hidden;
+    transition:.4s;
+}
+
+.video-card:hover{
+    transform:translateY(-8px);
+}
+
+.video-card:before{
+    content:"";
+    position:absolute;
+    width:160px;
+    height:160px;
+    background:#ffbdd7;
+    filter:blur(55px);
+    top:-70px;
+    right:-50px;
+    opacity:.5;
+}
+
+.film-frame{
+    position:relative;
+    border-radius:25px;
+    overflow:hidden;
+    background:#351c28;
+    padding:18px 9px;
+}
+
+.film-frame:before,
+.film-frame:after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    height:11px;
+    z-index:5;
+    background:
+        radial-gradient(circle,#fff 3px,transparent 4px)
+        0 50%/22px 10px repeat-x;
+    opacity:.55;
+    pointer-events:none;
+}
+
+.film-frame:before{
+    top:4px;
+}
+
+.film-frame:after{
+    bottom:4px;
+}
+
+.video-wrap{
+    position:relative;
+    overflow:hidden;
+    border-radius:18px;
+}
+
+.video-element{
+    display:block;
+    width:100%;
+    aspect-ratio:16/9;
+    object-fit:cover;
+    background:#24151d;
+    cursor:pointer;
+}
+
+.video-overlay{
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    pointer-events:none;
+}
+
+.big-play{
+    width:75px;
+    height:75px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:rgba(255,255,255,.88);
+    color:var(--pink);
+    font-size:25px;
+    box-shadow:0 10px 35px rgba(0,0,0,.18);
+    transition:.3s;
+}
+
+.video-element.playing + .video-overlay .big-play{
+    opacity:0;
+    transform:scale(.7);
+}
+
+.video-info{
+    padding:20px 8px 5px;
+    position:relative;
+    z-index:2;
+}
+
+.video-number{
+    color:var(--pink);
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:10px;
+    font-weight:700;
+}
+
+.video-info h3{
+    font-family:"Playfair Display",serif;
+    color:#81334f;
+    font-size:29px;
+    margin:7px 0;
+}
+
+.video-info p{
+    color:var(--muted);
+    line-height:1.6;
+    font-size:14px;
 }
 
 .quote{
-    margin-top:12px;
+    min-height:48px;
+    margin:18px 0;
+    color:#8b4261;
     font-family:"Playfair Display",serif;
     font-style:italic;
-    color:#9d6e7b;
+    line-height:1.6;
+    transition:.4s;
 }
 
-/* ---------------- OPTION SECTION ---------------- */
-
-.options{
-    max-width:900px;
-    margin:100px auto;
-    padding:20px;
+.controls{
+    display:flex;
+    align-items:center;
+    gap:8px;
 }
 
-.options h2{
-    text-align:center;
-    font-family:"Playfair Display",serif;
-    font-size:38px;
-    margin-bottom:35px;
+.control-btn{
+    width:41px;
+    height:41px;
+    flex:none;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    border:1px solid #f3c3d6;
+    background:white;
+    color:var(--pink);
+    cursor:pointer;
+    transition:.25s;
 }
+
+.control-btn:hover{
+    background:#fff0f6;
+    transform:scale(1.08);
+}
+
+.progress-video{
+    flex:1;
+    accent-color:var(--pink);
+    cursor:pointer;
+}
+
+.time{
+    min-width:78px;
+    text-align:right;
+    color:var(--muted);
+    font-size:10px;
+}
+
+/* =========================
+   CHOICE
+========================= */
 
 .option-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:1fr 1fr;
     gap:25px;
+    margin-top:50px;
 }
 
 .option{
     padding:35px;
-    border-radius:30px;
-    background:white;
-    box-shadow:0 20px 50px rgba(50,30,40,.08);
+    border-radius:32px;
+    cursor:pointer;
     transition:.4s;
+    position:relative;
+    overflow:hidden;
 }
 
 .option:hover{
     transform:translateY(-8px);
 }
 
+.option.selected{
+    border-color:#ff77aa;
+    box-shadow:
+        0 20px 60px rgba(255,79,145,.18),
+        inset 0 0 0 2px rgba(255,119,170,.12);
+}
+
+.option-icon{
+    width:70px;
+    height:70px;
+    display:grid;
+    place-items:center;
+    border-radius:22px;
+    background:#fff;
+    font-size:35px;
+    margin-bottom:20px;
+    box-shadow:0 10px 25px rgba(181,47,103,.08);
+}
+
 .option h3{
     font-family:"Playfair Display",serif;
-    font-size:26px;
-    margin-bottom:12px;
+    color:#81334f;
+    font-size:30px;
 }
 
 .option p{
-    color:#746a70;
+    color:var(--muted);
     line-height:1.7;
+    margin-top:8px;
 }
 
-.option button{
-    border:0;
-    background:#d98e9d;
-    color:white;
-    padding:12px 18px;
-    border-radius:30px;
+.option-tag{
+    display:inline-block;
+    color:var(--pink);
     margin-top:20px;
-    cursor:pointer;
+    font-size:10px;
+    letter-spacing:2px;
+    text-transform:uppercase;
 }
 
-/* ---------------- FINAL ---------------- */
+/* =========================
+   MEMORY MACHINE
+========================= */
 
-.final{
-    min-height:100vh;
+.memory-section{
+    text-align:center;
+}
+
+.memory-card{
+    width:min(700px,100%);
+    min-height:270px;
+    margin:45px auto 25px;
+    padding:40px;
+    border-radius:35px;
     display:flex;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
+    transition:.5s;
+}
+
+.memory-card.change{
+    animation:memoryFlip .5s ease;
+}
+
+@keyframes memoryFlip{
+    0%{
+        opacity:.3;
+        transform:scale(.95) rotateX(12deg);
+    }
+    100%{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.memory-emoji{
+    font-size:50px;
+    margin-bottom:18px;
+}
+
+.memory-card h3{
+    font-family:"Playfair Display",serif;
+    color:#81334f;
+    font-size:31px;
+}
+
+.memory-card p{
+    color:var(--muted);
+    max-width:520px;
+    line-height:1.7;
+    margin-top:10px;
+}
+
+.memory-btn{
+    padding:14px 23px;
+    border:1px solid #f1c2d4;
+    border-radius:30px;
+    background:white;
+    color:var(--pink);
+    cursor:pointer;
+    transition:.3s;
+}
+
+.memory-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(255,79,145,.12);
+}
+
+/* =========================
+   HEART CLICK EFFECT
+========================= */
+
+.click-heart{
+    position:fixed;
+    pointer-events:none;
+    z-index:10001;
+    color:var(--pink);
+    font-size:20px;
+    animation:heartPop 1s ease forwards;
+}
+
+@keyframes heartPop{
+    0%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(.4);
+    }
+    100%{
+        opacity:0;
+        transform:translate(-50%,-130px) scale(1.5) rotate(15deg);
+    }
+}
+
+/* =========================
+   FINAL
+========================= */
+
+.final{
+    min-height:80vh;
+    display:flex;
+    align-items:center;
     text-align:center;
-    padding:40px 20px;
-    background:
-        radial-gradient(circle at 50% 20%,#f8dce2,transparent 35%),
-        var(--cream);
+}
+
+.final-box{
+    width:100%;
+    padding:70px 25px;
+    border-radius:42px;
+    overflow:hidden;
+    position:relative;
+}
+
+.final-box:before,
+.final-box:after{
+    content:"❤";
+    position:absolute;
+    color:#ff9fc1;
+    opacity:.09;
+    font-size:170px;
+}
+
+.final-box:before{
+    left:-35px;
+    top:-50px;
+}
+
+.final-box:after{
+    right:-35px;
+    bottom:-50px;
 }
 
 .final-content{
-    max-width:750px;
+    position:relative;
+    z-index:2;
 }
 
-.final .heart{
+.final-heart{
     font-size:65px;
-    animation:heartbeat 1.6s infinite;
-}
-
-@keyframes heartbeat{
-    0%,100%{transform:scale(1)}
-    15%{transform:scale(1.15)}
-    30%{transform:scale(1)}
+    animation:heartbeat 1.5s infinite;
 }
 
 .final h2{
     font-family:"Playfair Display",serif;
-    font-size:clamp(40px,7vw,70px);
+    color:#873251;
+    font-size:clamp(42px,7vw,75px);
+    line-height:1.08;
     margin:20px 0;
 }
 
 .final p{
-    color:#746a70;
-    font-size:17px;
+    max-width:680px;
+    margin:auto;
+    color:var(--muted);
     line-height:1.9;
 }
 
-.final-quote{
-    margin-top:30px;
-    font-family:"Playfair Display",serif;
-    font-size:23px;
-    color:#9b6875;
+.days{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 20px;
+    margin:28px 0;
+    border-radius:40px;
+    background:white;
+    border:1px solid #f4cadb;
+    box-shadow:0 10px 30px rgba(181,47,103,.08);
 }
 
-.signature{
-    margin-top:40px;
-    font-family:"Playfair Display",serif;
-    font-size:20px;
+.days strong{
+    color:var(--pink);
+    font-size:27px;
 }
 
-/* ---------------- MODAL ---------------- */
+.footer{
+    text-align:center;
+    color:#aa8291;
+    padding:30px;
+    font-size:11px;
+}
+
+/* =========================
+   MODAL
+========================= */
 
 .modal{
     position:fixed;
     inset:0;
-    background:rgba(35,25,32,.45);
-    backdrop-filter:blur(8px);
+    z-index:9000;
     display:none;
-    align-items:center;
-    justify-content:center;
+    place-items:center;
     padding:20px;
-    z-index:100;
+    background:rgba(84,40,60,.25);
+    backdrop-filter:blur(8px);
 }
 
-.modal.active{
-    display:flex;
+.modal.show{
+    display:grid;
 }
 
 .modal-box{
-    background:white;
-    max-width:500px;
-    width:100%;
+    width:min(500px,100%);
     padding:35px;
-    border-radius:30px;
-    text-align:center;
-    animation:modalIn .4s ease;
+    border-radius:32px;
+    position:relative;
+    animation:modalIn .35s ease;
 }
 
 @keyframes modalIn{
-    from{transform:scale(.85);opacity:0}
-    to{transform:scale(1);opacity:1}
+    from{
+        opacity:0;
+        transform:translateY(20px) scale(.95);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
 }
 
-.close{
-    float:right;
+.modal-close{
+    position:absolute;
+    right:18px;
+    top:13px;
     border:0;
     background:none;
-    font-size:25px;
+    color:#9d526f;
+    font-size:27px;
     cursor:pointer;
 }
 
-/* ---------------- RESPONSIVE ---------------- */
+.modal-icon{
+    font-size:50px;
+}
 
-@media(max-width:700px){
+.modal h3{
+    font-family:"Playfair Display",serif;
+    color:#81334f;
+    font-size:32px;
+    margin:12px 0;
+}
 
-    .timeline::before{
-        left:18px;
+.modal p{
+    color:var(--muted);
+    line-height:1.7;
+}
+
+/* =========================
+   REVEAL
+========================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:1s cubic-bezier(.2,.7,.2,1);
+}
+
+.reveal.show{
+    opacity:1;
+    transform:none;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+@keyframes heartbeat{
+    0%,100%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.12);
+    }
+}
+
+@keyframes pulseGlow{
+    0%,100%{
+        box-shadow:
+        0 15px 50px rgba(255,79,145,.18),
+        inset 0 0 0 8px #fff2f7;
+    }
+    50%{
+        box-shadow:
+        0 15px 65px rgba(255,79,145,.35),
+        inset 0 0 0 8px #fff2f7;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+    section{
+        padding:75px 0;
     }
 
-    .event,
-    .event:nth-child(even),
-    .event:nth-child(odd){
-        width:100%;
-        left:0;
-        text-align:left;
-        padding-left:50px;
-        padding-right:5px;
+    .hero{
+        padding-top:115px;
     }
 
-    .event:nth-child(odd) .event-dot,
-    .event:nth-child(even) .event-dot{
-        left:10px;
-        right:auto;
+    .hero-grid{
+        grid-template-columns:1fr;
+        gap:40px;
     }
 
+    .hero-card{
+        min-height:350px;
+    }
+
+    .hero-card-inner{
+        min-height:290px;
+    }
+
+    .route-map{
+        height:330px;
+    }
+
+    .video-grid,
     .option-grid{
         grid-template-columns:1fr;
     }
 
-    .map{
-        height:360px;
+    .message-box{
+        padding:35px 22px;
     }
 
-    .map-label{
-        font-size:9px;
+    .timeline:before{
+        left:24px;
+    }
+
+    .event{
+        grid-template-columns:49px 1fr;
+        gap:13px;
+    }
+
+    .event-icon{
+        width:49px;
+        height:49px;
+        font-size:20px;
+    }
+
+    .video-card{
+        padding:10px;
+    }
+
+    .controls{
+        gap:6px;
+    }
+
+    .time{
+        min-width:65px;
+    }
+
+    .final-box{
+        padding:55px 20px;
     }
 }
-
 </style>
 </head>
 
 <body>
 
-<div class="background">
-    <div class="blob one"></div>
-    <div class="blob two"></div>
-    <div class="blob three"></div>
+<div class="page-progress" id="pageProgress"></div>
+
+
+<!-- =========================
+     INTRO
+========================= -->
+
+<div class="intro" id="intro">
+
+    <div class="intro-inner">
+
+        <div class="intro-flower">🌸</div>
+
+        <small>September 17 • Chennai</small>
+
+        <h1>
+            One Last<br>
+            Beautiful Day
+        </h1>
+
+        <p>
+            Before a new chapter begins,
+            let's save one beautiful Chennai day
+            in a little corner of the internet. 💗
+        </p>
+
+        <button class="open-btn" onclick="openJourney()">
+            Open Our Day ✨
+        </button>
+
+    </div>
+
 </div>
 
-<!-- HERO -->
+
+<main>
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
-<div class="hero-content">
+<div class="container hero-grid reveal">
 
-<div class="eyebrow">A day worth remembering</div>
+    <div>
 
-<h1>
-One Beautiful Day<br>
-Before <span>Bangalore</span> ❤️
-</h1>
+        <div class="hero-kicker">
+            A little memory made for Nidhu 💗
+        </div>
 
-<p>
-Tomorrow isn't just another day.
-It's one beautiful little chapter before
-Nidhu begins her Bangalore internship journey.
-45 days may feel long...
-but beautiful memories don't have an expiry date.
-</p>
+        <h2>
+            One day.<br>
+            One journey.<br>
+            <span>So many memories.</span>
+        </h2>
 
-<div class="date-badge">
-🌷 Tomorrow • Our Chennai Day
-</div>
+        <p class="hero-description">
+            From the first train in the morning to the final ride home,
+            every little stop has a story. Tomorrow may be the start
+            of a new chapter, but today deserves to be remembered.
+        </p>
 
-</div>
+        <div class="hero-buttons">
 
-<div class="scroll">
-↓ Scroll slowly — the journey begins
-</div>
+            <a href="#journey" class="hero-btn primary">
+                Explore our journey ↓
+            </a>
 
-</section>
+            <a href="#videos" class="hero-btn">
+                Our videos 🎬
+            </a>
 
+        </div>
 
-<!-- INTRO -->
-
-<section class="intro">
-
-<h2>Tomorrow's Little Adventure ✨</h2>
-
-<p>
-From the first train in the morning to the final goodbye at Medavakkam Tank,
-every destination has a tiny story waiting to happen.
-No rushing the moments.
-No checking the clock too much.
-Just two people, one beautiful day,
-and a lot of memories.
-</p>
-
-</section>
+    </div>
 
 
-<!-- MAP -->
+    <div class="hero-card glass">
 
-<section class="map-section">
+        <div class="hero-card-inner">
 
-<div class="map">
+            <div class="hero-heart">💗</div>
 
-<div class="road r1"></div>
-<div class="road r2"></div>
-<div class="road r3"></div>
-<div class="road r4"></div>
+            <div class="hero-icon-circle">
+                🚆
+            </div>
 
-<div class="route"></div>
+            <h3>
+                Our Chennai Day
+            </h3>
 
-<div class="map-point p1" onclick="openPlace('Pallavaram')">🚆</div>
-<div class="map-point p2" onclick="openPlace('Aerohub Mall')">🛍️</div>
-<div class="map-point p3" onclick="openPlace('Guindy')">🚆</div>
-<div class="map-point p4" onclick="openPlace('Sangeetha Restaurant')">🍽️</div>
-<div class="map-point p5" onclick="openPlace('Marina / Sai Baba Temple')">🌊</div>
-<div class="map-point p6" onclick="openPlace('Chennai Fort')">📍</div>
+            <p>
+                Train rides • Cafe talks • Aerohub • Lunch •
+                Temple / Beach • Burma noodles • Final train
+            </p>
 
-<div class="map-label l1">Pallavaram</div>
-<div class="map-label l2">Aerohub Mall</div>
-<div class="map-label l3">Guindy</div>
-<div class="map-label l4">Lunch</div>
-<div class="map-label l5">Evening</div>
-<div class="map-label l6">Fort</div>
+        </div>
+
+    </div>
 
 </div>
 
 </section>
 
 
-<!-- TIMELINE -->
+<!-- =========================
+     MESSAGE
+========================= -->
 
-<section class="timeline">
+<section class="message">
 
-<div class="event">
+<div class="container reveal">
 
-<div class="event-dot"></div>
+    <div class="section-label">
+        Before the journey begins
+    </div>
 
-<div class="time">08:00 AM</div>
+    <h2 class="section-title">
+        A little message for you
+    </h2>
 
-<div class="card" onclick="openPlace('Nidhu starts her journey')">
+    <div class="message-box glass">
 
-<div class="icon">🚆</div>
+        <p>
+            “Tomorrow isn't really goodbye.
+            It's just the beginning of another chapter.
+            Bangalore may get your next 45 days,
+            but Chennai will always have these memories.”
+        </p>
 
-<h3>The Journey Begins</h3>
+        <div class="signature">
+            Made with a lot of memories & a little bit of love 💗
+        </div>
 
-<p>
-Nidhu starts her morning train journey.
-A simple beginning to a day that will become a beautiful memory.
-</p>
-
-<div class="quote">
-"Every beautiful day begins with one small step."
-</div>
-
-</div>
-</div>
-
-
-<div class="event">
-
-<div class="event-dot"></div>
-
-<div class="time">09:00 – 09:30 AM</div>
-
-<div class="card">
-
-<div class="icon">📍</div>
-
-<h3>Pallavaram</h3>
-
-<p>
-Nidhu reaches Pallavaram.
-The actual adventure begins here. ❤️
-</p>
-
-<div class="quote">
-"Finally… the day we've been waiting for."
-</div>
-
-</div>
-</div>
-
-
-<div class="event">
-
-<div class="event-dot"></div>
-
-<div class="time">09:35 – 10:30 AM</div>
-
-<div class="card">
-
-<div class="icon">☕</div>
-
-<h3>Relax Café</h3>
-
-<p>
-Slow down.
-Sit together.
-Talk about everything.
-Laugh at random things.
-Create those small moments that somehow become the biggest memories later.
-</p>
-
-<div class="quote">
-"Some conversations become memories without us even realizing it."
-</div>
-
-</div>
-</div>
-
-
-<div class="event">
-
-<div class="event-dot"></div>
-
-<div class="time">10:40 AM</div>
-
-<div class="card">
-
-<div class="icon">🚉</div>
-
-<h3>Pallavaram Railway Station</h3>
-
-<p>
-Time to continue the journey.
-Next stop — Tirusulam.
-</p>
-
-</div>
-</div>
-
-
-<div class="event">
-
-<div class="event-dot"></div>
-
-<div class="time">11:10 AM</div>
-
-<div class="card">
-
-<div class="icon">🚆</div>
-
-<h3>Tirusulam Railway Station</h3>
-
-<p>
-Arrive at Tirusulam and continue toward the next adventure.
-</p>
-
-</div>
-</div>
-
-
-<div class="event">
-
-<div class="event-dot"></div>
-
-<div class="time">11:30 AM – 01:00 PM</div>
-
-<div class="card">
-
-<div class="icon">🛍️</div>
-
-<h3>Aerohub Mall</h3>
-
-<p>
-Explore.
-Eat something.
-Walk around.
-Take pictures.
-Laugh.
-Make the kind of random memories that you'll remember during those 45 days.
-</p>
-
-<div class="quote">
-"Not every memory needs a special occasion."
-</div>
-
-</div>
-</div>
-
-
-<div class="event">
-
-<div class="event-dot"></div>
-
-<div class="time">01:15 PM</div>
-
-<div class="card">
-
-<div class="icon">🚆</div>
-
-<h3>Train Time</h3>
-
-<p>
-Leave the mall and catch the train toward Guindy.
-</p>
-
-</div>
-</div>
-
-
-<div class="event">
-
-<div class="event-dot"></div>
-
-<div class="time">01:40 PM</div>
-
-<div class="card">
-
-<div class="icon">📍</div>
-
-<h3>Guindy Railway Station</h3>
-
-<p>
-Arrive at Guindy and continue toward lunch.
-</p>
-
-</div>
-</div>
-
-
-<div class="event">
-
-<div class="event-dot"></div>
-
-<div class="time">02:10 – 02:50 PM</div>
-
-<div class="card">
-
-<div class="icon">🍛</div>
-
-<h3>Sangeetha — Lunch</h3>
-
-<p>
-Good food.
-Good conversations.
-And probably a few "remember this?" moments.
-</p>
-
-<div class="quote">
-"Food tastes better when the company is special."
-</div>
-
-</div>
-</div>
-
-
-<div class="event">
-
-<div class="event-dot"></div>
-
-<div class="time">03:00 – 03:10 PM</div>
-
-<div class="card">
-
-<div class="icon">🚌</div>
-
-<h3>Guindy Bus Stop</h3>
-
-<p>
-Next destination decision time.
-Choose the afternoon adventure.
-</p>
-
-</div>
-</div>
-
-</section>
-
-
-<!-- OPTIONS -->
-
-<section class="options">
-
-<h2>🌸 The Afternoon Choice</h2>
-
-<div class="option-grid">
-
-<div class="option">
-
-<h3>Option A — Sai Baba Temple 🛕</h3>
-
-<p>
-Because tomorrow is Sai Baba day,
-head toward the Sai Baba Temple in Mylapore
-and spend some peaceful time there.
-</p>
-
-<button onclick="showMessage('Option A selected — A peaceful afternoon with blessings for Nidhu ❤️')">
-Choose Option A
-</button>
-
-</div>
-
-
-<div class="option">
-
-<h3>Option B — Marina Beach 🌊</h3>
-
-<p>
-Catch the bus toward Marina Beach,
-reach around 4:00 PM,
-enjoy the sea breeze and spend the evening together.
-</p>
-
-<button onclick="showMessage('Option B selected — Marina sunset memories activated 🌊❤️')">
-Choose Option B
-</button>
-
-</div>
+    </div>
 
 </div>
 
 </section>
 
 
-<!-- CONTINUE TIMELINE -->
+<!-- =========================
+     JOURNEY MAP
+========================= -->
+
+<section id="journey">
+
+<div class="container">
 
-<section class="timeline">
+    <div class="reveal">
+
+        <div class="section-label">
+            Our route
+        </div>
+
+        <h2 class="section-title">
+            Follow the little pink journey
+        </h2>
 
-<div class="event">
+        <p class="section-text">
+            Tap the glowing pins to discover what happens at each stop.
+        </p>
 
-<div class="event-dot"></div>
+    </div>
 
-<div class="time">04:00 – 05:40 PM</div>
 
-<div class="card">
+    <div class="route-wrap glass reveal">
 
-<div class="icon">🌊</div>
+        <div class="route-map">
 
-<h3>Marina Beach</h3>
+            <div class="route-map-title">
+                CHENNAI • OUR MEMORY ROUTE
+            </div>
 
-<p>
-Walk.
-Talk.
-Sit near the sea.
-Take photos.
-Watch the evening slowly change.
-</p>
+            <svg
+                class="route-svg"
+                viewBox="0 0 900 430"
+                preserveAspectRatio="none">
 
-<div class="quote">
-"Maybe the sea will remember this day too."
-</div>
+                <path
+                    class="route-line"
+                    d="
+                    M65 340
+                    C125 320 120 275 185 250
+                    C250 225 245 175 315 155
+                    C390 135 400 100 475 120
+                    C545 140 545 205 610 205
+                    C680 205 690 260 750 255
+                    C805 250 815 315 850 330
+                    "
+                />
 
-</div>
-</div>
+                <circle
+                    r="9"
+                    class="route-moving">
 
+                    <animateMotion
+                        dur="9s"
+                        repeatCount="indefinite"
+                        path="
+                        M65 340
+                        C125 320 120 275 185 250
+                        C250 225 245 175 315 155
+                        C390 135 400 100 475 120
+                        C545 140 545 205 610 205
+                        C680 205 690 260 750 255
+                        C805 250 815 315 850 330
+                        "
+                    />
 
-<div class="event">
+                </circle>
 
-<div class="event-dot"></div>
 
-<div class="time">05:50 PM</div>
+                <!-- TRAIN -->
 
-<div class="card">
+                <g
+                    class="map-pin"
+                    onclick="showPlace(
+                    'Train Journey',
+                    '🚆',
+                    '8:00 AM — The day begins with the first train journey.'
+                    )">
 
-<div class="icon">🚆</div>
+                    <circle cx="65" cy="340" r="15" class="pin-circle"/>
 
-<h3>Leaving Marina</h3>
+                    <text
+                        x="43"
+                        y="375"
+                        class="pin-label">
+                        Train
+                    </text>
 
-<p>
-The evening continues toward Chennai Fort.
-</p>
+                </g>
 
-</div>
-</div>
 
+                <!-- PALLAVARAM -->
 
-<div class="event">
+                <g
+                    class="map-pin"
+                    onclick="showPlace(
+                    'Pallavaram',
+                    '📍',
+                    '9:00–9:30 AM — Reaching Pallavaram and beginning our day together.'
+                    )">
 
-<div class="event-dot"></div>
+                    <circle cx="185" cy="250" r="15" class="pin-circle"/>
 
-<div class="time">06:20 PM</div>
+                    <text
+                        x="153"
+                        y="287"
+                        class="pin-label">
+                        Pallavaram
+                    </text>
 
-<div class="card">
+                </g>
 
-<div class="icon">📍</div>
 
-<h3>Chennai Fort</h3>
+                <!-- CAFE -->
 
-<p>
-Reach Fort and continue toward one final food stop.
-</p>
+                <g
+                    class="map-pin"
+                    onclick="showPlace(
+                    'Relax Cafe',
+                    '☕',
+                    '9:35–10:30 AM — Cafe time, conversations, laughter and beautiful moments.'
+                    )">
 
-</div>
-</div>
+                    <circle cx="315" cy="155" r="15" class="pin-circle"/>
 
+                    <text
+                        x="287"
+                        y="138"
+                        class="pin-label">
+                        Cafe
+                    </text>
 
-<div class="event">
+                </g>
 
-<div class="event-dot"></div>
 
-<div class="time">06:35 – 07:00 PM</div>
+                <!-- AEROHUB -->
 
-<div class="card">
+                <g
+                    class="map-pin"
+                    onclick="showPlace(
+                    'Aerohub Mall',
+                    '🏬',
+                    '11:30 AM–1:00 PM — Exploring Aerohub and making more memories.'
+                    )">
 
-<div class="icon">🍜</div>
+                    <circle cx="475" cy="120" r="15" class="pin-circle"/>
 
-<h3>Burma Noodles Stop</h3>
+                    <text
+                        x="447"
+                        y="98"
+                        class="pin-label">
+                        Aerohub
+                    </text>
 
-<p>
-One final famous food stop.
-Enjoy the noodles,
-talk about the day,
-and don't let the clock ruin the moment.
-</p>
+                </g>
 
-<div class="quote">
-"One more bite. One more laugh. One more memory."
-</div>
 
-</div>
-</div>
+                <!-- LUNCH -->
 
+                <g
+                    class="map-pin"
+                    onclick="showPlace(
+                    'Sangeetha',
+                    '🍛',
+                    '2:10–2:50 PM — Lunch and another little pause in the journey.'
+                    )">
 
-<div class="event">
+                    <circle cx="610" cy="205" r="15" class="pin-circle"/>
 
-<div class="event-dot"></div>
+                    <text
+                        x="592"
+                        y="240"
+                        class="pin-label">
+                        Lunch
+                    </text>
 
-<div class="time">07:15 PM</div>
+                </g>
 
-<div class="card">
 
-<div class="icon">🚉</div>
+                <!-- CHOICE -->
 
-<h3>Fort Railway Station</h3>
+                <g
+                    class="map-pin"
+                    onclick="showPlace(
+                    'Afternoon Choice',
+                    '🌸',
+                    'Around 4:00 PM — Sai Baba Temple, Mylapore OR Marina Beach.'
+                    )">
 
-<p>
-Back to the station for the final train journey of the day.
-</p>
+                    <circle cx="750" cy="255" r="15" class="pin-circle"/>
 
-</div>
-</div>
+                    <text
+                        x="718"
+                        y="292"
+                        class="pin-label">
+                        Choice
+                    </text>
 
+                </g>
 
-<div class="event">
 
-<div class="event-dot"></div>
+                <!-- FORT -->
 
-<div class="time">07:25 – 07:40 PM</div>
+                <g
+                    class="map-pin"
+                    onclick="showPlace(
+                    'Chennai Fort',
+                    '🌃',
+                    'Evening — heading towards Fort for the final part of the day.'
+                    )">
 
-<div class="card">
+                    <circle cx="850" cy="330" r="15" class="pin-circle"/>
 
-<div class="icon">🚆</div>
+                    <text
+                        x="827"
+                        y="367"
+                        class="pin-label">
+                        Fort
+                    </text>
 
-<h3>Fort → Park</h3>
+                </g>
 
-<p>
-Catch the train and reach Park Station.
-</p>
+            </svg>
 
-</div>
-</div>
+        </div>
 
+        <div class="route-note">
+            💗 Tap any destination
+        </div>
 
-<div class="event">
+    </div>
 
-<div class="event-dot"></div>
-
-<div class="time">07:50 PM</div>
-
-<div class="card">
-
-<div class="icon">🚶</div>
-
-<h3>Park Station → Bus Stand</h3>
-
-<p>
-A short walk before the final bus ride.
-</p>
-
-</div>
-</div>
-
-
-<div class="event">
-
-<div class="event-dot"></div>
-
-<div class="time">08:00 PM</div>
-
-<div class="card">
-
-<div class="icon">🚌</div>
-
-<h3>Final Bus Journey</h3>
-
-<p>
-The final ride of this beautiful Chennai day.
-Destination: Medavakkam Tank.
-</p>
-
-</div>
-</div>
-
-
-<div class="event">
-
-<div class="event-dot"></div>
-
-<div class="time">08:30 PM</div>
-
-<div class="card">
-
-<div class="icon">🌙</div>
-
-<h3>Medavakkam Tank</h3>
-
-<p>
-The planned end of our beautiful day.
-Not the end of the memories.
-</p>
-
-<div class="quote">
-"Some days end. Some memories never do."
-</div>
-
-</div>
 </div>
 
 </section>
 
 
-<!-- FINAL MESSAGE -->
+<!-- =========================
+     TIMELINE
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="reveal">
+
+        <div class="section-label">
+            September 17
+        </div>
+
+        <h2 class="section-title">
+            Every little chapter
+        </h2>
+
+    </div>
+
+
+    <div class="timeline">
+
+
+        <div class="event reveal">
+
+            <div class="event-icon">🚆</div>
+
+            <div class="event-card glass">
+
+                <div class="event-time">
+                    8:00 AM
+                </div>
+
+                <div class="event-title">
+                    The journey begins
+                </div>
+
+                <div class="event-description">
+                    The first train ride of our little Chennai adventure.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="event reveal">
+
+            <div class="event-icon">📍</div>
+
+            <div class="event-card glass">
+
+                <div class="event-time">
+                    9:00–9:30 AM
+                </div>
+
+                <div class="event-title">
+                    Pallavaram
+                </div>
+
+                <div class="event-description">
+                    Reaching Pallavaram and starting the day together.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="event reveal">
+
+            <div class="event-icon">☕</div>
+
+            <div class="event-card glass">
+
+                <div class="event-time">
+                    9:35–10:30 AM
+                </div>
+
+                <div class="event-title">
+                    Relax Cafe
+                </div>
+
+                <div class="event-description">
+                    Coffee, conversations, laughter and the moments
+                    that somehow become the best memories.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="event reveal">
+
+            <div class="event-icon">🚉</div>
+
+            <div class="event-card glass">
+
+                <div class="event-time">
+                    10:40–11:10 AM
+                </div>
+
+                <div class="event-title">
+                    Pallavaram → Tirusulam
+                </div>
+
+                <div class="event-description">
+                    Another train ride before the next chapter.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="event reveal">
+
+            <div class="event-icon">🏬</div>
+
+            <div class="event-card glass">
+
+                <div class="event-time">
+                    11:30 AM–1:00 PM
+                </div>
+
+                <div class="event-title">
+                    Aerohub Mall
+                </div>
+
+                <div class="event-description">
+                    Exploring, walking around and collecting
+                    another set of memories.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="event reveal">
+
+            <div class="event-icon">🚆</div>
+
+            <div class="event-card glass">
+
+                <div class="event-time">
+                    1:15–1:40 PM
+                </div>
+
+                <div class="event-title">
+                    Aerohub → Guindy
+                </div>
+
+                <div class="event-description">
+                    Catching the train and continuing the journey.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="event reveal">
+
+            <div class="event-icon">🍛</div>
+
+            <div class="event-card glass">
+
+                <div class="event-time">
+                    2:10–2:50 PM
+                </div>
+
+                <div class="event-title">
+                    Sangeetha — Lunch
+                </div>
+
+                <div class="event-description">
+                    Food, conversations and a little recharge.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="event reveal">
+
+            <div class="event-icon">🚌</div>
+
+            <div class="event-card glass">
+
+                <div class="event-time">
+                    3:00–3:10 PM
+                </div>
+
+                <div class="event-title">
+                    Guindy Bus Station
+                </div>
+
+                <div class="event-description">
+                    Catch the next bus towards the afternoon chapter.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="event reveal">
+
+            <div class="event-icon">🌸</div>
+
+            <div class="event-card glass">
+
+                <div class="event-time">
+                    Around 4:00 PM
+                </div>
+
+                <div class="event-title">
+                    The afternoon choice
+                </div>
+
+                <div class="event-description">
+                    Sai Baba Temple, Mylapore or Marina Beach.
+                    Two possible ways to make the afternoon memorable.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="event reveal">
+
+            <div class="event-icon">🌆</div>
+
+            <div class="event-card glass">
+
+                <div class="event-time">
+                    5:50–6:20 PM
+                </div>
+
+                <div class="event-title">
+                    Towards Chennai Fort
+                </div>
+
+                <div class="event-description">
+                    Leaving the afternoon behind and entering
+                    the final evening chapter.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="event reveal">
+
+            <div class="event-icon">🍜</div>
+
+            <div class="event-card glass">
+
+                <div class="event-time">
+                    6:35–7:00 PM
+                </div>
+
+                <div class="event-title">
+                    Burma Noodles Stop
+                </div>
+
+                <div class="event-description">
+                    One final food stop before the last train ride.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="event reveal">
+
+            <div class="event-icon">🚆</div>
+
+            <div class="event-card glass">
+
+                <div class="event-time">
+                    7:15–7:40 PM
+                </div>
+
+                <div class="event-title">
+                    Fort → Park
+                </div>
+
+                <div class="event-description">
+                    One more train ride through Chennai.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="event reveal">
+
+            <div class="event-icon">🚌</div>
+
+            <div class="event-card glass">
+
+                <div class="event-time">
+                    7:50–8:30 PM
+                </div>
+
+                <div class="event-title">
+                    The final ride
+                </div>
+
+                <div class="event-description">
+                    Walk to Park bus station, catch the bus
+                    and reach Medavakkam Tank around 8:30 PM.
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     TWO VIDEOS
+========================= -->
+
+<section id="videos">
+
+<div class="container">
+
+    <div class="reveal">
+
+        <div class="section-label">
+            Our memories
+        </div>
+
+        <h2 class="section-title">
+            Two videos.<br>
+            One beautiful day.
+        </h2>
+
+        <p class="section-text">
+            Add your two videos below. Each memory has its own
+            cinematic frame, controls and changing quotes.
+        </p>
+
+    </div>
+
+
+    <div class="video-grid">
+
+
+        <!-- VIDEO 1 -->
+
+        <div class="video-card glass reveal">
+
+            <div class="film-frame">
+
+                <div class="video-wrap">
+
+                    <video
+                        id="video1"
+                        class="video-element"
+                        playsinline
+                        preload="metadata">
+
+                        <source
+                            src="our-memory-1.mp4"
+                            type="video/mp4">
+
+                    </video>
+
+                    <div class="video-overlay">
+                        <div class="big-play">
+                            ▶
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="video-info">
+
+                <div class="video-number">
+                    Memory Film • 01
+                </div>
+
+                <h3>
+                    Before the goodbye 🌸
+                </h3>
+
+                <p>
+                    The first little collection of moments
+                    from our Chennai day.
+                </p>
+
+                <div class="quote" id="quote1">
+                    “Some ordinary moments become extraordinary memories.”
+                </div>
+
+
+                <div class="controls">
+
+                    <button
+                        class="control-btn"
+                        id="play1"
+                        onclick="toggleVideo('video1','play1')">
+                        ▶
+                    </button>
+
+                    <button
+                        class="control-btn"
+                        onclick="stopVideo('video1','play1')">
+                        ⏹
+                    </button>
+
+                    <input
+                        class="progress-video"
+                        id="progress1"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="0">
+
+                    <div
+                        class="time"
+                        id="time1">
+                        0:00 / 0:00
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- VIDEO 2 -->
+
+        <div class="video-card glass reveal">
+
+            <div class="film-frame">
+
+                <div class="video-wrap">
+
+                    <video
+                        id="video2"
+                        class="video-element"
+                        playsinline
+                        preload="metadata">
+
+                        <source
+                            src="our-memory-2.mp4"
+                            type="video/mp4">
+
+                    </video>
+
+                    <div class="video-overlay">
+                        <div class="big-play">
+                            ▶
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="video-info">
+
+                <div class="video-number">
+                    Memory Film • 02
+                </div>
+
+                <h3>
+                    One more memory 💗
+                </h3>
+
+                <p>
+                    Because one video could never hold
+                    everything this day means.
+                </p>
+
+                <div class="quote" id="quote2">
+                    “Distance changes places, not the memories we keep.”
+                </div>
+
+
+                <div class="controls">
+
+                    <button
+                        class="control-btn"
+                        id="play2"
+                        onclick="toggleVideo('video2','play2')">
+                        ▶
+                    </button>
+
+                    <button
+                        class="control-btn"
+                        onclick="stopVideo('video2','play2')">
+                        ⏹
+                    </button>
+
+                    <input
+                        class="progress-video"
+                        id="progress2"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="0">
+
+                    <div
+                        class="time"
+                        id="time2">
+                        0:00 / 0:00
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     AFTERNOON CHOICE
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="reveal">
+
+        <div class="section-label">
+            Around 4 PM
+        </div>
+
+        <h2 class="section-title">
+            Choose our afternoon chapter
+        </h2>
+
+        <p class="section-text">
+            Tap a card. It will glow when selected.
+        </p>
+
+    </div>
+
+
+    <div class="option-grid">
+
+
+        <div
+            class="option glass reveal"
+            onclick="selectOption(this,'Sai Baba Temple')">
+
+            <div class="option-icon">
+                🙏
+            </div>
+
+            <h3>
+                Option A
+            </h3>
+
+            <p>
+                Sai Baba Temple, Mylapore —
+                a peaceful stop for blessings,
+                calm moments and new beginnings.
+            </p>
+
+            <span class="option-tag">
+                Blessings • Peace • New chapter
+            </span>
+
+        </div>
+
+
+        <div
+            class="option glass reveal"
+            onclick="selectOption(this,'Marina Beach')">
+
+            <div class="option-icon">
+                🌊
+            </div>
+
+            <h3>
+                Option B
+            </h3>
+
+            <p>
+                Marina Beach —
+                sea breeze, conversations,
+                Chennai vibes and an evening memory.
+            </p>
+
+            <span class="option-tag">
+                Sea • Sunset • Chennai
+            </span>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     MEMORY RANDOMIZER
+========================= -->
+
+<section class="memory-section">
+
+<div class="container reveal">
+
+    <div class="section-label">
+        Tiny memories
+    </div>
+
+    <h2 class="section-title">
+        Open a random memory 💌
+    </h2>
+
+    <p class="section-text" style="margin:auto">
+        Every click reveals another little thought.
+    </p>
+
+
+    <div
+        class="memory-card glass"
+        id="memoryCard">
+
+        <div
+            class="memory-emoji"
+            id="memoryEmoji">
+            ☕
+        </div>
+
+        <h3 id="memoryTitle">
+            Cafe conversations
+        </h3>
+
+        <p id="memoryText">
+            Sometimes the best part of meeting someone
+            is simply sitting together and talking.
+        </p>
+
+    </div>
+
+
+    <button
+        class="memory-btn"
+        onclick="newMemory()">
+
+        ✨ Give me another memory
+
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FINAL
+========================= -->
 
 <section class="final">
 
-<div class="final-content">
+<div class="container">
 
-<div class="heart">❤️</div>
+    <div class="final-box glass reveal">
 
-<div class="eyebrow">Before you leave for Bangalore</div>
+        <div class="final-content">
 
-<h2>Dear Nidhu,</h2>
+            <div class="final-heart">
+                💗
+            </div>
 
-<p>
-Tomorrow isn't really a goodbye.
+            <div class="section-label">
+                Until the next chapter
+            </div>
 
-It's just a little pause before another chapter begins.
+            <h2>
+                Bangalore is waiting.<br>
+                Chennai will remember.
+            </h2>
 
-Go to Bangalore.
-Learn new things.
-Experience new places.
-Build your career.
-Meet new people.
-Enjoy your internship.
 
-And whenever the days feel long,
-remember that Chennai has one beautiful day
-waiting inside its memories.
+            <div class="days">
 
-45 days will pass.
+                <span>⏳</span>
 
-And when you come back,
-we'll have another day to plan.
+                <strong>
+                    45
+                </strong>
 
-Until then...
+                <span>
+                    days of a new chapter
+                </span>
 
-keep smiling,
-keep growing,
-and keep being you. 🌷
-</p>
+            </div>
 
-<div class="final-quote">
-"Distance can change the place,
-but it doesn't have to change the memories."
-</div>
 
-<div class="signature">
-— From someone who wanted to make tomorrow memorable ❤️
-</div>
+            <p>
+
+                Go chase the experience waiting for you.
+                Learn something new.
+                Meet new people.
+                Make beautiful memories.
+
+                <br><br>
+
+                And when you come back,
+                let's make another ordinary day
+                feel this special again.
+
+                <br><br>
+
+                <strong style="color:#81334f">
+                    This isn't goodbye, Nidhu.
+                    It's just “see you after the next chapter.” 💗
+                </strong>
+
+            </p>
+
+        </div>
+
+    </div>
 
 </div>
 
 </section>
 
 
-<!-- MODAL -->
-
-<div class="modal" id="modal">
-
-<div class="modal-box">
-
-<button class="close" onclick="closeModal()">×</button>
-
-<div style="font-size:45px;margin-bottom:15px;">📍</div>
-
-<h2 id="modalTitle"></h2>
-
-<p id="modalText" style="margin-top:15px;line-height:1.7;color:#756970;"></p>
-
+<div class="footer">
+    Made with memories • Chennai → Bangalore 🌸
 </div>
+
+</main>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="modal">
+
+    <div class="modal-box glass">
+
+        <button
+            class="modal-close"
+            onclick="closeModal()">
+            ×
+        </button>
+
+        <div
+            class="modal-icon"
+            id="modalIcon">
+            📍
+        </div>
+
+        <h3 id="modalTitle">
+            Destination
+        </h3>
+
+        <p id="modalText"></p>
+
+    </div>
 
 </div>
 
 
 <script>
 
-/* ---------------- SCROLL ANIMATION ---------------- */
+/* =========================
+   OPEN INTRO
+========================= */
 
-const events = document.querySelectorAll(".event");
+function openJourney(){
 
-const observer = new IntersectionObserver(
-(entries)=>{
-    entries.forEach(entry=>{
-        if(entry.isIntersecting){
-            entry.target.classList.add("show");
-        }
-    });
-},
-{
-    threshold:.15
+    document
+        .getElementById("intro")
+        .classList.add("hide");
+
+    createPetals();
+
+}
+
+
+/* =========================
+   FLOATING PETALS
+========================= */
+
+const petals=[
+    "🌸",
+    "💗",
+    "✨",
+    "🌷",
+    "💕",
+    "✦"
+];
+
+function createPetals(){
+
+    setInterval(()=>{
+
+        const petal=
+            document.createElement("div");
+
+        petal.className="petal";
+
+        petal.innerText=
+            petals[
+                Math.floor(
+                    Math.random()*petals.length
+                )
+            ];
+
+        petal.style.left=
+            Math.random()*100+"vw";
+
+        petal.style.fontSize=
+            (8+Math.random()*15)+"px";
+
+        petal.style.animationDuration=
+            (5+Math.random()*7)+"s";
+
+        document.body.appendChild(petal);
+
+        setTimeout(()=>{
+            petal.remove();
+        },13000);
+
+    },550);
+
+}
+
+
+/* =========================
+   SCROLL PROGRESS
+========================= */
+
+window.addEventListener("scroll",()=>{
+
+    const top=
+        window.scrollY;
+
+    const total=
+        document.documentElement.scrollHeight-
+        window.innerHeight;
+
+    const percentage=
+        total>0
+        ?
+        (top/total)*100
+        :
+        0;
+
+    document
+        .getElementById("pageProgress")
+        .style.width=
+        percentage+"%";
+
 });
 
-events.forEach(event=>observer.observe(event));
 
+/* =========================
+   SCROLL REVEAL
+========================= */
 
-/* ---------------- PLACE MODAL ---------------- */
+const revealObserver=
+    new IntersectionObserver(
+        entries=>{
 
-function openPlace(place){
+            entries.forEach(entry=>{
 
-    const title=document.getElementById("modalTitle");
-    const text=document.getElementById("modalText");
-    const modal=document.getElementById("modal");
+                if(entry.isIntersecting){
 
-    const places={
+                    entry
+                        .target
+                        .classList
+                        .add("show");
 
-        "Pallavaram":{
-            title:"📍 Pallavaram",
-            text:"09:00 – 09:30 AM • The place where the beautiful day officially begins."
+                }
+
+            });
+
         },
-
-        "Aerohub Mall":{
-            title:"🛍️ Aerohub Mall",
-            text:"11:30 AM – 01:00 PM • Explore, laugh, eat and create memories."
-        },
-
-        "Guindy":{
-            title:"🚆 Guindy",
-            text:"01:40 PM • Arrive here before heading for lunch."
-        },
-
-        "Sangeetha Restaurant":{
-            title:"🍛 Lunch Time",
-            text:"02:10 – 02:50 PM • Good food + good conversations = perfect combination."
-        },
-
-        "Marina / Sai Baba Temple":{
-            title:"🌸 Afternoon Choice",
-            text:"Around 04:00 PM • Choose between a peaceful Sai Baba Temple visit or Marina Beach."
-        },
-
-        "Chennai Fort":{
-            title:"📍 Chennai Fort",
-            text:"06:20 PM • Evening journey continues from here."
-        },
-
-        "Nidhu starts her journey":{
-            title:"🚆 08:00 AM",
-            text:"Nidhu starts her journey. And with that, one very special Chennai day begins."
+        {
+            threshold:.12
         }
+    );
 
-    };
 
-    title.innerText=places[place].title;
-    text.innerText=places[place].text;
+document
+    .querySelectorAll(".reveal")
+    .forEach(el=>{
+        revealObserver.observe(el);
+    });
 
-    modal.classList.add("active");
+
+/* =========================
+   DESTINATION MODAL
+========================= */
+
+function showPlace(title,icon,text){
+
+    document
+        .getElementById("modalTitle")
+        .innerText=title;
+
+    document
+        .getElementById("modalIcon")
+        .innerText=icon;
+
+    document
+        .getElementById("modalText")
+        .innerText=text;
+
+    document
+        .getElementById("modal")
+        .classList
+        .add("show");
+
 }
 
 
 function closeModal(){
-    document.getElementById("modal").classList.remove("active");
+
+    document
+        .getElementById("modal")
+        .classList
+        .remove("show");
+
 }
 
 
-document.getElementById("modal").addEventListener("click",(e)=>{
-    if(e.target.id==="modal"){
-        closeModal();
+document
+    .getElementById("modal")
+    .addEventListener("click",e=>{
+
+        if(e.target.id==="modal"){
+            closeModal();
+        }
+
+    });
+
+
+/* =========================
+   AFTERNOON OPTION
+========================= */
+
+function selectOption(element,name){
+
+    document
+        .querySelectorAll(".option")
+        .forEach(card=>{
+            card.classList.remove("selected");
+        });
+
+    element.classList.add("selected");
+
+    showPlace(
+        name,
+        name==="Marina Beach"
+            ?
+            "🌊"
+            :
+            "🙏",
+        name==="Marina Beach"
+            ?
+            "Marina Beach — sea breeze, conversations and Chennai sunset vibes."
+            :
+            "Sai Baba Temple, Mylapore — a peaceful afternoon for blessings and new beginnings."
+    );
+
+}
+
+
+/* =========================
+   RANDOM MEMORY
+========================= */
+
+const memories=[
+
+    {
+        emoji:"☕",
+        title:"Cafe conversations",
+        text:"Sometimes the best part of meeting someone is simply sitting together and talking."
+    },
+
+    {
+        emoji:"🚆",
+        title:"Train rides",
+        text:"The destination matters, but sometimes the journey becomes the memory."
+    },
+
+    {
+        emoji:"😂",
+        title:"Random laughter",
+        text:"The moments that weren't planned are often the ones we remember the longest."
+    },
+
+    {
+        emoji:"📸",
+        title:"One more picture",
+        text:"A picture freezes a moment that life will never recreate in exactly the same way."
+    },
+
+    {
+        emoji:"🍜",
+        title:"One last food stop",
+        text:"Even a simple meal can become part of a beautiful goodbye story."
+    },
+
+    {
+        emoji:"🌸",
+        title:"The little things",
+        text:"Friendship isn't always about huge moments. Sometimes it is simply showing up."
+    },
+
+    {
+        emoji:"💗",
+        title:"A new chapter",
+        text:"New places can bring new experiences without taking away the memories already made."
+    },
+
+    {
+        emoji:"🌊",
+        title:"Chennai evenings",
+        text:"Some places become special simply because of who we were with when we visited them."
     }
+
+];
+
+
+function newMemory(){
+
+    const card=
+        document.getElementById("memoryCard");
+
+    card.classList.remove("change");
+
+    void card.offsetWidth;
+
+    card.classList.add("change");
+
+    const memory=
+        memories[
+            Math.floor(
+                Math.random()*memories.length
+            )
+        ];
+
+    document
+        .getElementById("memoryEmoji")
+        .innerText=memory.emoji;
+
+    document
+        .getElementById("memoryTitle")
+        .innerText=memory.title;
+
+    document
+        .getElementById("memoryText")
+        .innerText=memory.text;
+
+}
+
+
+/* =========================
+   HEART CLICK EFFECT
+========================= */
+
+document.addEventListener("click",e=>{
+
+    if(
+        e.target.tagName==="BUTTON" ||
+        e.target.closest("button") ||
+        e.target.closest("video")
+    ){
+        return;
+    }
+
+    const heart=
+        document.createElement("div");
+
+    heart.className="click-heart";
+
+    heart.innerText=
+        Math.random()>.5
+        ?
+        "💗"
+        :
+        "💕";
+
+    heart.style.left=e.clientX+"px";
+    heart.style.top=e.clientY+"px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },1000);
+
 });
 
 
-/* ---------------- OPTION MESSAGE ---------------- */
+/* =========================
+   VIDEO PLAYER
+========================= */
 
-function showMessage(message){
+const quotes1=[
 
-    document.getElementById("modalTitle").innerText="✨ Your Choice";
-    document.getElementById("modalText").innerText=message;
+    "“Some ordinary moments become extraordinary memories.”",
 
-    document.getElementById("modal").classList.add("active");
+    "“We didn't know this moment would become special.”",
+
+    "“A small day can hold a very big memory.”",
+
+    "“The laughter will stay long after the day ends.”"
+
+];
+
+const quotes2=[
+
+    "“Distance changes places, not the memories we keep.”",
+
+    "“Some memories travel with us.”",
+
+    "“The next chapter doesn't erase the previous one.”",
+
+    "“Until the next Chennai memory.”"
+
+];
+
+
+function formatTime(seconds){
+
+    if(!isFinite(seconds)){
+        return "0:00";
+    }
+
+    const minutes=
+        Math.floor(seconds/60);
+
+    const secs=
+        Math.floor(seconds%60)
+        .toString()
+        .padStart(2,"0");
+
+    return minutes+":"+secs;
+
 }
 
 
-/* ---------------- MAP ROUTE MOVEMENT ---------------- */
+function toggleVideo(videoId,buttonId){
 
-const route=document.querySelector(".route");
+    const video=
+        document.getElementById(videoId);
 
-let routePosition=0;
+    const button=
+        document.getElementById(buttonId);
 
-function animateRoute(){
 
-    routePosition+=0.15;
+    if(video.paused){
 
-    if(routePosition>100){
-        routePosition=0;
+        document
+            .querySelectorAll(".video-element")
+            .forEach(other=>{
+
+                if(other!==video){
+                    other.pause();
+                }
+
+            });
+
+        video.play();
+
+    }else{
+
+        video.pause();
+
     }
 
-    route.style.background=
-        `linear-gradient(
-        90deg,
-        rgba(215,139,155,.3) ${routePosition}%,
-        #d7ae68 ${routePosition+10}%,
-        #d98e9d ${routePosition+20}%,
-        rgba(215,139,155,.3) ${routePosition+30}%
-        )`;
-
-    requestAnimationFrame(animateRoute);
 }
 
-animateRoute();
+
+function stopVideo(videoId,buttonId){
+
+    const video=
+        document.getElementById(videoId);
+
+    video.pause();
+
+    video.currentTime=0;
+
+}
 
 
-/* ---------------- ESCAPE KEY ---------------- */
+function setupVideo(
+    videoId,
+    buttonId,
+    progressId,
+    timeId,
+    quoteId,
+    quotes
+){
 
-document.addEventListener("keydown",(e)=>{
-    if(e.key==="Escape"){
-        closeModal();
-    }
-});
+    const video=
+        document.getElementById(videoId);
+
+    const button=
+        document.getElementById(buttonId);
+
+    const progress=
+        document.getElementById(progressId);
+
+    const time=
+        document.getElementById(timeId);
+
+    const quote=
+        document.getElementById(quoteId);
+
+
+    video.addEventListener(
+        "loadedmetadata",
+        ()=>{
+
+            time.innerText=
+                "0:00 / "
+                +
+                formatTime(video.duration);
+
+        }
+    );
+
+
+    video.addEventListener(
+        "timeupdate",
+        ()=>{
+
+            if(!video.duration){
+                return;
+            }
+
+            progress.value=
+                (video.currentTime/video.duration)*100;
+
+            time.innerText=
+                formatTime(video.currentTime)
+                +
+                " / "
+                +
+                formatTime(video.duration);
+
+
+            const index=
+                Math.min(
+                    quotes.length-1,
+                    Math.floor(
+                        (video.currentTime/video.duration)
+                        *
+                        quotes.length
+                    )
+                );
+
+            quote.innerText=
+                quotes[index];
+
+        }
+    );
+
+
+    video.addEventListener(
+        "play",
+        ()=>{
+
+            button.innerText="❚❚";
+
+            video.classList.add("playing");
+
+        }
+    );
+
+
+    video.addEventListener(
+        "pause",
+        ()=>{
+
+            button.innerText="▶";
+
+            video.classList.remove("playing");
+
+        }
+    );
+
+
+    video.addEventListener(
+        "ended",
+        ()=>{
+
+            button.innerText="▶";
+
+            video.classList.remove("playing");
+
+        }
+    );
+
+
+    progress.addEventListener(
+        "input",
+        ()=>{
+
+            if(video.duration){
+
+                video.currentTime=
+                    (progress.value/100)
+                    *
+                    video.duration;
+
+            }
+
+        }
+    );
+
+
+    video.addEventListener(
+        "click",
+        ()=>{
+
+            if(video.paused){
+                video.play();
+            }else{
+                video.pause();
+            }
+
+        }
+    );
+
+}
+
+
+setupVideo(
+    "video1",
+    "play1",
+    "progress1",
+    "time1",
+    "quote1",
+    quotes1
+);
+
+
+setupVideo(
+    "video2",
+    "play2",
+    "progress2",
+    "time2",
+    "quote2",
+    quotes2
+);
+
+
+/* =========================
+   START PETALS
+========================= */
+
+setTimeout(
+    createPetals,
+    1500
+);
 
 </script>
 
 </body>
-                     </html>
+</html>
