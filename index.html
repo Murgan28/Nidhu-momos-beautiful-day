@@ -8,26 +8,47 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+/* =====================================================
+   ROOT
+===================================================== */
+
 :root{
     --pink:#ff4f91;
     --pink2:#ff78ad;
+    --pink3:#ff9fc4;
+
     --light:#fff0f6;
+    --light2:#fff7fa;
     --soft:#ffd9e8;
+
     --deep:#b52f67;
+    --dark:#81334f;
+
     --white:#ffffff;
+
     --text:#54283c;
-    --muted:#8f6878;
-    --glass:rgba(255,255,255,.72);
-    --shadow:0 20px 60px rgba(181,47,103,.15);
+    --muted:#906c7b;
+
+    --glass:rgba(255,255,255,.74);
+
+    --shadow:
+        0 20px 60px rgba(181,47,103,.15);
 }
 
+
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
 html{
@@ -36,23 +57,61 @@ html{
 
 body{
     font-family:"DM Sans",sans-serif;
+
     color:var(--text);
+
     background:
-        radial-gradient(circle at 10% 5%,#ffe3ef 0,transparent 25%),
-        radial-gradient(circle at 90% 20%,#ffd9e9 0,transparent 25%),
-        linear-gradient(180deg,#fff8fb,#fff0f6 45%,#fff8fb);
+        radial-gradient(
+            circle at 10% 5%,
+            #ffe1ed 0,
+            transparent 26%
+        ),
+
+        radial-gradient(
+            circle at 90% 18%,
+            #ffdce9 0,
+            transparent 27%
+        ),
+
+        radial-gradient(
+            circle at 40% 80%,
+            #fff0f6 0,
+            transparent 30%
+        ),
+
+        linear-gradient(
+            180deg,
+            #fff9fc,
+            #fff0f6,
+            #fff9fc
+        );
+
     overflow-x:hidden;
 }
 
-body:before{
+body::before{
     content:"";
+
     position:fixed;
+
     inset:0;
+
     pointer-events:none;
+
     z-index:-1;
+
     background:
-        radial-gradient(circle at 30% 70%,rgba(255,79,145,.08),transparent 25%),
-        radial-gradient(circle at 80% 80%,rgba(255,174,204,.1),transparent 25%);
+        radial-gradient(
+            circle at 25% 65%,
+            rgba(255,79,145,.07),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(255,174,204,.09),
+            transparent 25%
+        );
 }
 
 button{
@@ -60,7 +119,7 @@ button{
 }
 
 a{
-    color:inherit;
+    text-decoration:none;
 }
 
 ::selection{
@@ -68,22 +127,70 @@ a{
     color:white;
 }
 
-/* =========================
-   LOADING / OPEN SCREEN
-========================= */
+
+/* =====================================================
+   PAGE PROGRESS
+===================================================== */
+
+.page-progress{
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:0;
+    height:4px;
+
+    z-index:10000;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff3e83,
+            #ff8bb7,
+            #ff4f91
+        );
+
+    box-shadow:
+        0 0 15px rgba(255,79,145,.5);
+
+    transition:width .1s linear;
+}
+
+
+/* =====================================================
+   INTRO SCREEN
+===================================================== */
 
 .intro{
     position:fixed;
+
     inset:0;
+
     z-index:9999;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     text-align:center;
+
+    padding:20px;
+
     background:
-        radial-gradient(circle at center,#ffe5f0,transparent 40%),
+        radial-gradient(
+            circle at center,
+            #ffe4ef,
+            transparent 42%
+        ),
+
         #fff5f9;
-    transition:1s ease;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
 }
 
 .intro.hide{
@@ -97,310 +204,413 @@ a{
 }
 
 .intro-flower{
-    width:95px;
-    height:95px;
-    margin:auto auto 25px;
+    width:100px;
+    height:100px;
+
+    margin:0 auto 25px;
+
     display:grid;
     place-items:center;
+
     border-radius:50%;
-    font-size:46px;
+
     background:white;
+
+    font-size:47px;
+
     box-shadow:
-        0 15px 50px rgba(255,79,145,.18),
-        inset 0 0 0 8px #fff2f7;
-    animation:float 3s ease-in-out infinite,
-              pulseGlow 2s infinite;
+        0 15px 55px rgba(255,79,145,.2),
+        inset 0 0 0 8px #fff1f7;
+
+    animation:
+        float 3s ease-in-out infinite,
+        pulseGlow 2s infinite;
 }
 
 .intro small{
     color:var(--deep);
-    letter-spacing:4px;
+
     font-size:11px;
-    text-transform:uppercase;
+
     font-weight:700;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
 }
 
 .intro h1{
-    font-family:"Playfair Display",serif;
-    color:#8d3157;
-    font-size:clamp(43px,8vw,78px);
-    line-height:1.05;
     margin:18px 0;
+
+    color:#8d3157;
+
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(44px,8vw,80px);
+
+    line-height:1.04;
 }
 
 .intro p{
     color:var(--muted);
-    line-height:1.8;
+
     font-size:16px;
+
+    line-height:1.8;
 }
 
 .open-btn{
     margin-top:30px;
-    padding:15px 28px;
+
+    padding:15px 29px;
+
     border:0;
+
     border-radius:50px;
+
     color:white;
-    background:linear-gradient(135deg,var(--pink),var(--pink2));
-    box-shadow:0 12px 35px rgba(255,79,145,.28);
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--pink),
+            var(--pink2)
+        );
+
+    box-shadow:
+        0 14px 38px rgba(255,79,145,.3);
+
     cursor:pointer;
+
     transition:.3s;
 }
 
 .open-btn:hover{
-    transform:translateY(-4px) scale(1.03);
+    transform:
+        translateY(-4px)
+        scale(1.03);
 }
 
-/* =========================
-   PAGE PROGRESS
-========================= */
 
-.page-progress{
-    position:fixed;
-    top:0;
-    left:0;
-    height:4px;
-    width:0;
-    z-index:10000;
-    background:linear-gradient(90deg,#ff3e83,#ff9dc4,#ff4f91);
-    box-shadow:0 0 12px rgba(255,79,145,.4);
-}
-
-/* =========================
-   FLOATING PETALS
-========================= */
-
-.petal{
-    position:fixed;
-    top:-30px;
-    pointer-events:none;
-    z-index:5;
-    animation:petalFall linear forwards;
-    opacity:.65;
-}
-
-@keyframes petalFall{
-    0%{
-        transform:translateY(-30px) rotate(0);
-        opacity:0;
-    }
-    15%{
-        opacity:.7;
-    }
-    100%{
-        transform:translateY(110vh) translateX(80px) rotate(420deg);
-        opacity:0;
-    }
-}
-
-/* =========================
-   GLOBAL
-========================= */
+/* =====================================================
+   CONTAINER / SECTIONS
+===================================================== */
 
 .container{
     width:min(1120px,92%);
+
     margin:auto;
 }
 
 section{
-    padding:100px 0;
     position:relative;
+
+    padding:105px 0;
 }
 
 .section-label{
-    color:var(--pink);
-    text-transform:uppercase;
-    letter-spacing:3px;
-    font-size:11px;
-    font-weight:700;
     margin-bottom:13px;
+
+    color:var(--pink);
+
+    font-size:11px;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
 }
 
 .section-title{
-    font-family:"Playfair Display",serif;
-    color:#873251;
-    font-size:clamp(37px,6vw,60px);
-    line-height:1.08;
     margin-bottom:18px;
+
+    color:#873251;
+
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(37px,6vw,60px);
+
+    line-height:1.08;
 }
 
 .section-text{
-    color:var(--muted);
     max-width:650px;
+
+    color:var(--muted);
+
     line-height:1.8;
 }
 
 .glass{
     background:var(--glass);
-    border:1px solid rgba(255,255,255,.9);
+
+    border:
+        1px solid
+        rgba(255,255,255,.95);
+
     box-shadow:var(--shadow);
+
     backdrop-filter:blur(18px);
+
     -webkit-backdrop-filter:blur(18px);
 }
 
-/* =========================
+
+/* =====================================================
    HERO
-========================= */
+===================================================== */
 
 .hero{
     min-height:100vh;
+
     display:flex;
+
     align-items:center;
-    padding-top:120px;
+
+    padding-top:125px;
 }
 
 .hero-grid{
     display:grid;
-    grid-template-columns:1.15fr .85fr;
+
+    grid-template-columns:
+        1.15fr
+        .85fr;
+
     gap:60px;
+
     align-items:center;
 }
 
 .hero-kicker{
     color:var(--pink);
+
     font-size:13px;
+
     font-weight:700;
+
     letter-spacing:2px;
 }
 
 .hero h2{
-    font-family:"Playfair Display",serif;
-    color:#7d2e4e;
-    font-size:clamp(55px,8vw,100px);
-    line-height:.95;
     margin:20px 0 28px;
+
+    color:#7d2e4e;
+
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(55px,8vw,100px);
+
+    line-height:.95;
 }
 
 .hero h2 span{
     color:var(--pink);
+
     position:relative;
 }
 
-.hero h2 span:after{
+.hero h2 span::after{
     content:"";
+
     position:absolute;
+
     left:0;
     right:0;
-    bottom:-7px;
+
+    bottom:-9px;
+
     height:8px;
-    background:url("data:image/svg+xml,%3Csvg width='200' height='15' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 9 Q 50 0 100 9 T198 9' fill='none' stroke='%23ff78ad' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E")
-    center/100% 100% no-repeat;
+
+    background:
+        url("data:image/svg+xml,%3Csvg width='200' height='15' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 9 Q50 0 100 9 T198 9' fill='none' stroke='%23ff78ad' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E")
+        center/100% 100%
+        no-repeat;
 }
 
 .hero-description{
-    color:var(--muted);
     max-width:620px;
-    line-height:1.8;
+
+    color:var(--muted);
+
     font-size:17px;
+
+    line-height:1.8;
 }
 
 .hero-buttons{
     display:flex;
+
     gap:12px;
+
     flex-wrap:wrap;
+
     margin-top:30px;
 }
 
 .hero-btn{
-    text-decoration:none;
-    padding:13px 20px;
+    padding:13px 21px;
+
+    border:
+        1px solid
+        #f3c5d7;
+
     border-radius:30px;
-    border:1px solid #f3c5d7;
+
     background:white;
+
     color:var(--deep);
+
     transition:.3s;
 }
 
 .hero-btn.primary{
-    color:white;
     border:0;
-    background:linear-gradient(135deg,var(--pink),var(--pink2));
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--pink),
+            var(--pink2)
+        );
 }
 
 .hero-btn:hover{
     transform:translateY(-4px);
-    box-shadow:0 12px 25px rgba(255,79,145,.16);
+
+    box-shadow:
+        0 12px 28px
+        rgba(255,79,145,.15);
 }
 
-/* HERO MEMORY CARD */
+
+/* =====================================================
+   HERO CARD
+===================================================== */
 
 .hero-card{
-    min-height:430px;
-    border-radius:38px;
+    min-height:440px;
+
     padding:30px;
+
+    border-radius:38px;
+
     position:relative;
+
     overflow:hidden;
 }
 
-.hero-card:before{
+.hero-card::before{
     content:"";
+
     position:absolute;
-    width:230px;
-    height:230px;
+
+    width:240px;
+    height:240px;
+
     border-radius:50%;
+
     background:#ffc0d9;
+
     filter:blur(35px);
+
     top:-80px;
     right:-70px;
+
     opacity:.55;
 }
 
-.hero-card:after{
+.hero-card::after{
     content:"";
+
     position:absolute;
+
     width:180px;
     height:180px;
+
     border-radius:50%;
+
     background:#ffdce9;
+
     filter:blur(35px);
+
     bottom:-70px;
     left:-50px;
 }
 
 .hero-card-inner{
     position:relative;
+
     z-index:2;
+
+    min-height:380px;
+
     height:100%;
-    min-height:370px;
+
     display:flex;
+
     flex-direction:column;
+
     justify-content:flex-end;
 }
 
 .hero-heart{
     position:absolute;
-    top:40px;
-    right:35px;
-    font-size:45px;
+
+    top:15px;
+    right:10px;
+
+    font-size:48px;
+
     animation:heartbeat 1.6s infinite;
 }
 
 .hero-icon-circle{
-    width:100px;
-    height:100px;
+    width:105px;
+    height:105px;
+
     display:grid;
+
     place-items:center;
-    border-radius:50%;
-    font-size:48px;
-    background:white;
-    box-shadow:0 15px 40px rgba(181,47,103,.12);
+
     margin-bottom:auto;
+
+    border-radius:50%;
+
+    background:white;
+
+    font-size:50px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(181,47,103,.12);
+
+    animation:float 4s ease-in-out infinite;
 }
 
 .hero-card h3{
-    font-family:"Playfair Display",serif;
     color:#873251;
+
+    font-family:"Playfair Display",serif;
+
     font-size:34px;
 }
 
 .hero-card p{
-    color:var(--muted);
-    line-height:1.7;
     margin-top:8px;
+
+    color:var(--muted);
+
+    line-height:1.7;
 }
 
-/* =========================
+
+/* =====================================================
    MESSAGE
-========================= */
+===================================================== */
 
 .message{
     text-align:center;
@@ -408,71 +618,117 @@ section{
 
 .message-box{
     max-width:850px;
+
     margin:40px auto 0;
-    padding:50px;
+
+    padding:52px;
+
     border-radius:35px;
+
     position:relative;
+
     overflow:hidden;
 }
 
-.message-box:before{
+.message-box::before{
     content:"❤";
+
     position:absolute;
-    font-size:190px;
-    color:#ffb7d2;
-    opacity:.08;
-    right:-15px;
+
+    right:-10px;
     bottom:-70px;
+
+    color:#ffb7d2;
+
+    font-size:200px;
+
+    opacity:.08;
 }
 
 .message-box p{
     position:relative;
-    font-family:"Playfair Display",serif;
-    font-size:clamp(22px,4vw,35px);
-    line-height:1.55;
+
     color:#773149;
+
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(22px,4vw,35px);
+
+    line-height:1.55;
 }
 
 .signature{
     margin-top:25px;
+
     color:var(--pink);
+
     font-weight:600;
 }
 
-/* =========================
-   INTERACTIVE JOURNEY
-========================= */
+
+/* =====================================================
+   JOURNEY MAP
+===================================================== */
 
 .route-wrap{
     margin-top:50px;
+
     padding:18px;
+
     border-radius:35px;
 }
 
 .route-map{
     height:450px;
-    border-radius:27px;
-    overflow:hidden;
+
     position:relative;
+
+    overflow:hidden;
+
+    border-radius:27px;
+
     background:
-        linear-gradient(rgba(255,120,173,.08) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,120,173,.08) 1px,transparent 1px),
+        linear-gradient(
+            rgba(255,120,173,.08) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,120,173,.08) 1px,
+            transparent 1px
+        ),
+
         #fff8fb;
+
     background-size:42px 42px;
 }
 
 .route-map-title{
     position:absolute;
+
     top:20px;
     left:22px;
-    z-index:3;
-    padding:8px 12px;
+
+    z-index:5;
+
+    padding:8px 13px;
+
     border-radius:20px;
+
     background:white;
+
     color:var(--pink);
+
     font-size:10px;
+
+    font-weight:700;
+
     letter-spacing:2px;
-    box-shadow:0 8px 20px rgba(181,47,103,.08);
+
+    box-shadow:
+        0 8px 20px
+        rgba(181,47,103,.08);
 }
 
 .route-svg{
@@ -482,331 +738,723 @@ section{
 
 .route-line{
     fill:none;
-    stroke:#ff6fa5;
-    stroke-width:6;
-    stroke-linecap:round;
-    stroke-dasharray:12 12;
-    animation:routeDash 3s linear infinite;
-}
 
-@keyframes routeDash{
-    to{
-        stroke-dashoffset:-100;
-    }
+    stroke:#ff6fa5;
+
+    stroke-width:6;
+
+    stroke-linecap:round;
+
+    stroke-dasharray:12 12;
+
+    animation:
+        routeDash 3s
+        linear infinite;
 }
 
 .route-moving{
     fill:#ff3e83;
+
     stroke:white;
+
     stroke-width:5;
-    filter:drop-shadow(0 3px 7px rgba(255,62,131,.4));
+
+    filter:
+        drop-shadow(
+            0 3px 8px
+            rgba(255,62,131,.4)
+        );
 }
 
 .map-pin{
     cursor:pointer;
+
     transition:.25s;
 }
 
 .map-pin:hover{
-    transform:translateY(-5px) scale(1.12);
+    transform:
+        translateY(-6px)
+        scale(1.1);
 }
 
 .pin-circle{
     fill:#ff5c97;
+
     stroke:white;
+
     stroke-width:3;
 }
 
 .pin-label{
     fill:#81334f;
+
     font-size:12px;
+
     font-weight:700;
 }
 
 .route-note{
+    padding-top:15px;
+
     text-align:center;
-    margin:15px 0 3px;
+
     color:var(--muted);
+
     font-size:12px;
 }
 
-/* =========================
+
+/* =====================================================
    TIMELINE
-========================= */
+===================================================== */
 
 .timeline{
-    margin-top:60px;
     position:relative;
+
+    margin-top:60px;
 }
 
-.timeline:before{
+.timeline::before{
     content:"";
+
     position:absolute;
-    left:27px;
+
     top:0;
     bottom:0;
+
+    left:27px;
+
     width:3px;
+
     border-radius:10px;
-    background:linear-gradient(#ff78ad,#ffc0d9,transparent);
+
+    background:
+        linear-gradient(
+            #ff78ad,
+            #ffc0d9,
+            transparent
+        );
 }
 
 .event{
     display:grid;
-    grid-template-columns:55px 1fr;
+
+    grid-template-columns:
+        55px
+        1fr;
+
     gap:20px;
+
     margin-bottom:25px;
 }
 
 .event-icon{
     width:55px;
     height:55px;
-    border-radius:50%;
+
     display:grid;
+
     place-items:center;
-    font-size:23px;
-    background:white;
-    border:3px solid #ffe1ec;
-    box-shadow:0 8px 25px rgba(181,47,103,.12);
+
     z-index:2;
+
+    border:
+        3px solid
+        #ffe1ec;
+
+    border-radius:50%;
+
+    background:white;
+
+    font-size:23px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(181,47,103,.12);
+
     transition:.3s;
 }
 
 .event:hover .event-icon{
-    transform:rotate(-8deg) scale(1.12);
+    transform:
+        rotate(-8deg)
+        scale(1.12);
+
     border-color:#ff9fc2;
 }
 
 .event-card{
     padding:23px;
+
     border-radius:25px;
+
     transition:.35s;
 }
 
 .event-card:hover{
     transform:translateX(8px);
-    box-shadow:0 20px 45px rgba(181,47,103,.13);
+
+    box-shadow:
+        0 20px 45px
+        rgba(181,47,103,.13);
 }
 
 .event-time{
-    color:var(--pink);
-    font-size:12px;
-    font-weight:700;
     margin-bottom:6px;
+
+    color:var(--pink);
+
+    font-size:12px;
+
+    font-weight:700;
 }
 
 .event-title{
-    font-size:19px;
-    font-weight:700;
     color:#713048;
+
+    font-size:19px;
+
+    font-weight:700;
 }
 
 .event-description{
     margin-top:7px;
+
     color:var(--muted);
-    line-height:1.65;
+
     font-size:14px;
+
+    line-height:1.65;
 }
 
-/* =========================
-   VIDEOS
-========================= */
+
+/* =====================================================
+   VIDEO SECTION
+===================================================== */
+
+.video-intro{
+    position:relative;
+}
+
+.video-floating-heart{
+    position:absolute;
+
+    top:0;
+    right:8%;
+
+    color:#ff9fc1;
+
+    font-size:55px;
+
+    opacity:.45;
+
+    animation:
+        heartbeat 1.8s infinite,
+        float 3s ease-in-out infinite;
+}
+
+
+/* VIDEO GRID */
 
 .video-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:28px;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap:30px;
+
     margin-top:55px;
 }
 
+
+/* VIDEO CARD */
+
 .video-card{
-    padding:12px;
-    border-radius:34px;
     position:relative;
+
+    padding:14px;
+
+    border-radius:32px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.96),
+            rgba(255,232,241,.92)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.95);
+
+    box-shadow:
+        0 20px 55px
+        rgba(181,47,103,.15),
+
+        0 5px 18px
+        rgba(255,79,145,.08);
+
     overflow:hidden;
-    transition:.4s;
+
+    transition:
+        .45s
+        cubic-bezier(.2,.8,.2,1);
 }
 
 .video-card:hover{
-    transform:translateY(-8px);
+    transform:translateY(-9px);
+
+    box-shadow:
+        0 30px 70px
+        rgba(181,47,103,.20),
+
+        0 10px 30px
+        rgba(255,79,145,.13);
 }
 
-.video-card:before{
+
+/* VIDEO CARD GLOW */
+
+.video-card::before{
     content:"";
-    position:absolute;
-    width:160px;
-    height:160px;
-    background:#ffbdd7;
-    filter:blur(55px);
-    top:-70px;
-    right:-50px;
-    opacity:.5;
-}
 
-.film-frame{
-    position:relative;
-    border-radius:25px;
-    overflow:hidden;
-    background:#351c28;
-    padding:18px 9px;
-}
-
-.film-frame:before,
-.film-frame:after{
-    content:"";
     position:absolute;
-    left:0;
-    right:0;
-    height:11px;
-    z-index:5;
-    background:
-        radial-gradient(circle,#fff 3px,transparent 4px)
-        0 50%/22px 10px repeat-x;
-    opacity:.55;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:#ffb5d0;
+
+    filter:blur(65px);
+
+    opacity:.35;
+
+    top:-90px;
+    right:-60px;
+
     pointer-events:none;
 }
 
-.film-frame:before{
-    top:4px;
+.video-card::after{
+    content:"";
+
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    border-radius:50%;
+
+    background:#ffd3e4;
+
+    filter:blur(60px);
+
+    opacity:.5;
+
+    bottom:-80px;
+    left:-50px;
+
+    pointer-events:none;
 }
 
-.film-frame:after{
-    bottom:4px;
+
+/* =====================================================
+   FILM FRAME
+===================================================== */
+
+.film-frame{
+    position:relative;
+
+    width:100%;
+
+    padding:12px;
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #4a2636,
+            #25151d
+        );
+
+    box-shadow:
+        inset 0 0 0 1px
+        rgba(255,255,255,.12),
+
+        0 12px 35px
+        rgba(67,24,43,.22);
+
+    overflow:hidden;
 }
+
+
+/* FILM HOLES */
+
+.film-frame::before,
+.film-frame::after{
+    content:"";
+
+    position:absolute;
+
+    left:12px;
+    right:12px;
+
+    height:8px;
+
+    z-index:6;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.65) 3px,
+            transparent 3.5px
+        )
+        0 50% /
+        20px 8px
+        repeat-x;
+
+    opacity:.45;
+
+    pointer-events:none;
+}
+
+.film-frame::before{
+    top:2px;
+}
+
+.film-frame::after{
+    bottom:2px;
+}
+
+
+/* =====================================================
+   VIDEO SIZE
+===================================================== */
 
 .video-wrap{
     position:relative;
+
+    width:100%;
+
+    /*
+       BOTH VIDEOS ARE 16:9
+
+       Video 1:
+       1280 x 720
+
+       Video 2:
+       1920 x 1080
+    */
+
+    aspect-ratio:16 / 9;
+
+    border-radius:17px;
+
     overflow:hidden;
-    border-radius:18px;
+
+    background:#21131a;
 }
+
+
+/* ACTUAL VIDEO */
 
 .video-element{
     display:block;
+
     width:100%;
-    aspect-ratio:16/9;
-    object-fit:cover;
-    background:#24151d;
+    height:100%;
+
+    aspect-ratio:16 / 9;
+
+    /*
+       IMPORTANT:
+       contain prevents cropping.
+    */
+
+    object-fit:contain;
+
+    background:#21131a;
+
     cursor:pointer;
+
+    transition:.4s ease;
 }
+
+
+/* Slight cinematic movement */
+
+.video-element.playing{
+    transform:scale(1.015);
+}
+
+
+/* =====================================================
+   CENTER PLAY
+===================================================== */
 
 .video-overlay{
     position:absolute;
+
     inset:0;
+
     display:grid;
+
     place-items:center;
+
     pointer-events:none;
 }
 
 .big-play{
     width:75px;
     height:75px;
+
     display:grid;
+
     place-items:center;
+
     border-radius:50%;
-    background:rgba(255,255,255,.88);
+
+    background:
+        rgba(255,255,255,.94);
+
     color:var(--pink);
+
     font-size:25px;
-    box-shadow:0 10px 35px rgba(0,0,0,.18);
-    transition:.3s;
+
+    box-shadow:
+        0 12px 35px
+        rgba(0,0,0,.18),
+
+        0 0 0 8px
+        rgba(255,255,255,.12);
+
+    transition:.35s;
 }
 
-.video-element.playing + .video-overlay .big-play{
+.video-element.playing
++ .video-overlay
+.big-play{
     opacity:0;
+
     transform:scale(.7);
 }
 
+
+/* =====================================================
+   VIDEO INFO
+===================================================== */
+
 .video-info{
-    padding:20px 8px 5px;
     position:relative;
-    z-index:2;
+
+    z-index:3;
+
+    padding:22px 8px 6px;
 }
 
 .video-number{
+    display:inline-block;
+
+    padding:6px 10px;
+
+    border-radius:20px;
+
+    background:#fff0f6;
+
     color:var(--pink);
-    letter-spacing:2px;
-    text-transform:uppercase;
-    font-size:10px;
+
+    font-size:9px;
+
     font-weight:700;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
 }
 
 .video-info h3{
-    font-family:"Playfair Display",serif;
+    margin:12px 0 6px;
+
     color:#81334f;
-    font-size:29px;
-    margin:7px 0;
+
+    font-family:"Playfair Display",serif;
+
+    font-size:30px;
 }
 
 .video-info p{
-    color:var(--muted);
-    line-height:1.6;
+    color:#967080;
+
     font-size:14px;
+
+    line-height:1.65;
 }
 
+
+/* =====================================================
+   VIDEO QUOTE
+===================================================== */
+
 .quote{
-    min-height:48px;
+    min-height:50px;
+
+    position:relative;
+
     margin:18px 0;
+
+    padding-left:16px;
+
     color:#8b4261;
+
     font-family:"Playfair Display",serif;
+
+    font-size:15px;
+
     font-style:italic;
-    line-height:1.6;
+
+    line-height:1.65;
+
     transition:.4s;
 }
 
-.controls{
-    display:flex;
-    align-items:center;
-    gap:8px;
+.quote::before{
+    content:"♥";
+
+    position:absolute;
+
+    top:2px;
+    left:0;
+
+    color:#ff78ad;
+
+    font-size:10px;
 }
 
+
+/* =====================================================
+   VIDEO CONTROLS
+===================================================== */
+
+.controls{
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:8px;
+
+    border:
+        1px solid
+        #f7d3e1;
+
+    border-radius:25px;
+
+    background:
+        rgba(255,255,255,.78);
+}
+
+
+/* PLAY / STOP */
+
 .control-btn{
-    width:41px;
-    height:41px;
+    width:40px;
+    height:40px;
+
     flex:none;
+
     display:grid;
+
     place-items:center;
+
+    border:
+        1px solid
+        #f2c5d7;
+
     border-radius:50%;
-    border:1px solid #f3c3d6;
+
     background:white;
+
     color:var(--pink);
+
     cursor:pointer;
+
     transition:.25s;
 }
 
 .control-btn:hover{
+    transform:scale(1.1);
+
     background:#fff0f6;
-    transform:scale(1.08);
+
+    box-shadow:
+        0 6px 18px
+        rgba(255,79,145,.15);
 }
+
+
+/* PROGRESS */
 
 .progress-video{
     flex:1;
+
+    height:5px;
+
+    border-radius:10px;
+
     accent-color:var(--pink);
+
     cursor:pointer;
 }
 
+
+/* TIME */
+
 .time{
-    min-width:78px;
-    text-align:right;
-    color:var(--muted);
+    min-width:75px;
+
+    color:#9b7181;
+
     font-size:10px;
+
+    text-align:right;
 }
 
-/* =========================
-   CHOICE
-========================= */
+
+/* =====================================================
+   AFTERNOON OPTIONS
+===================================================== */
 
 .option-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
     gap:25px;
+
     margin-top:50px;
 }
 
 .option{
-    padding:35px;
-    border-radius:32px;
-    cursor:pointer;
-    transition:.4s;
     position:relative;
+
+    padding:35px;
+
+    border-radius:32px;
+
+    cursor:pointer;
+
     overflow:hidden;
+
+    transition:.4s;
 }
 
 .option:hover{
@@ -815,47 +1463,78 @@ section{
 
 .option.selected{
     border-color:#ff77aa;
+
     box-shadow:
-        0 20px 60px rgba(255,79,145,.18),
-        inset 0 0 0 2px rgba(255,119,170,.12);
+        0 20px 60px
+        rgba(255,79,145,.18),
+
+        inset 0 0 0 2px
+        rgba(255,119,170,.12);
 }
 
 .option-icon{
     width:70px;
     height:70px;
+
     display:grid;
+
     place-items:center;
-    border-radius:22px;
-    background:#fff;
-    font-size:35px;
+
     margin-bottom:20px;
-    box-shadow:0 10px 25px rgba(181,47,103,.08);
+
+    border-radius:22px;
+
+    background:white;
+
+    font-size:35px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(181,47,103,.08);
+
+    transition:.35s;
+}
+
+.option:hover .option-icon{
+    transform:
+        rotate(-6deg)
+        scale(1.08);
 }
 
 .option h3{
-    font-family:"Playfair Display",serif;
     color:#81334f;
+
+    font-family:"Playfair Display",serif;
+
     font-size:30px;
 }
 
 .option p{
-    color:var(--muted);
-    line-height:1.7;
     margin-top:8px;
+
+    color:var(--muted);
+
+    line-height:1.7;
 }
 
 .option-tag{
     display:inline-block;
-    color:var(--pink);
+
     margin-top:20px;
+
+    color:var(--pink);
+
     font-size:10px;
+
     letter-spacing:2px;
+
     text-transform:uppercase;
 }
 
-/* =========================
+
+/* =====================================================
    MEMORY MACHINE
-========================= */
+===================================================== */
 
 .memory-section{
     text-align:center;
@@ -863,188 +1542,291 @@ section{
 
 .memory-card{
     width:min(700px,100%);
+
     min-height:270px;
+
     margin:45px auto 25px;
+
     padding:40px;
-    border-radius:35px;
+
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
+
     align-items:center;
+
+    border-radius:35px;
+
     transition:.5s;
 }
 
 .memory-card.change{
-    animation:memoryFlip .5s ease;
+    animation:
+        memoryFlip
+        .5s
+        ease;
 }
 
 @keyframes memoryFlip{
+
     0%{
         opacity:.3;
-        transform:scale(.95) rotateX(12deg);
+
+        transform:
+            scale(.95)
+            rotateX(12deg);
     }
+
     100%{
         opacity:1;
+
         transform:none;
     }
 }
 
 .memory-emoji{
-    font-size:50px;
     margin-bottom:18px;
+
+    font-size:50px;
 }
 
 .memory-card h3{
-    font-family:"Playfair Display",serif;
     color:#81334f;
+
+    font-family:"Playfair Display",serif;
+
     font-size:31px;
 }
 
 .memory-card p{
-    color:var(--muted);
     max-width:520px;
-    line-height:1.7;
+
     margin-top:10px;
+
+    color:var(--muted);
+
+    line-height:1.7;
 }
 
 .memory-btn{
     padding:14px 23px;
-    border:1px solid #f1c2d4;
+
+    border:
+        1px solid
+        #f1c2d4;
+
     border-radius:30px;
+
     background:white;
+
     color:var(--pink);
+
     cursor:pointer;
+
     transition:.3s;
 }
 
 .memory-btn:hover{
     transform:translateY(-4px);
-    box-shadow:0 10px 25px rgba(255,79,145,.12);
+
+    box-shadow:
+        0 10px 25px
+        rgba(255,79,145,.12);
 }
 
-/* =========================
-   HEART CLICK EFFECT
-========================= */
+
+/* =====================================================
+   CLICK HEARTS
+===================================================== */
 
 .click-heart{
     position:fixed;
-    pointer-events:none;
+
     z-index:10001;
+
+    pointer-events:none;
+
     color:var(--pink);
+
     font-size:20px;
-    animation:heartPop 1s ease forwards;
+
+    animation:
+        heartPop
+        1s
+        ease
+        forwards;
 }
 
 @keyframes heartPop{
+
     0%{
         opacity:1;
-        transform:translate(-50%,-50%) scale(.4);
+
+        transform:
+            translate(-50%,-50%)
+            scale(.4);
     }
+
     100%{
         opacity:0;
-        transform:translate(-50%,-130px) scale(1.5) rotate(15deg);
+
+        transform:
+            translate(-50%,-130px)
+            scale(1.5)
+            rotate(15deg);
     }
 }
 
-/* =========================
-   FINAL
-========================= */
+
+/* =====================================================
+   FINAL SECTION
+===================================================== */
 
 .final{
     min-height:80vh;
+
     display:flex;
+
     align-items:center;
+
     text-align:center;
 }
 
 .final-box{
     width:100%;
+
     padding:70px 25px;
+
     border-radius:42px;
-    overflow:hidden;
+
     position:relative;
+
+    overflow:hidden;
 }
 
-.final-box:before,
-.final-box:after{
+.final-box::before,
+.final-box::after{
     content:"❤";
+
     position:absolute;
+
     color:#ff9fc1;
-    opacity:.09;
+
     font-size:170px;
+
+    opacity:.09;
 }
 
-.final-box:before{
+.final-box::before{
     left:-35px;
     top:-50px;
 }
 
-.final-box:after{
+.final-box::after{
     right:-35px;
     bottom:-50px;
 }
 
 .final-content{
     position:relative;
+
     z-index:2;
 }
 
 .final-heart{
     font-size:65px;
-    animation:heartbeat 1.5s infinite;
+
+    animation:
+        heartbeat
+        1.5s
+        infinite;
 }
 
 .final h2{
-    font-family:"Playfair Display",serif;
-    color:#873251;
-    font-size:clamp(42px,7vw,75px);
-    line-height:1.08;
     margin:20px 0;
+
+    color:#873251;
+
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(42px,7vw,75px);
+
+    line-height:1.08;
 }
 
 .final p{
     max-width:680px;
+
     margin:auto;
+
     color:var(--muted);
+
     line-height:1.9;
 }
 
 .days{
     display:inline-flex;
+
     align-items:center;
+
     gap:10px;
-    padding:12px 20px;
+
     margin:28px 0;
+
+    padding:12px 20px;
+
+    border:
+        1px solid
+        #f4cadb;
+
     border-radius:40px;
+
     background:white;
-    border:1px solid #f4cadb;
-    box-shadow:0 10px 30px rgba(181,47,103,.08);
+
+    box-shadow:
+        0 10px 30px
+        rgba(181,47,103,.08);
 }
 
 .days strong{
     color:var(--pink);
+
     font-size:27px;
 }
 
 .footer{
-    text-align:center;
-    color:#aa8291;
     padding:30px;
+
+    color:#aa8291;
+
     font-size:11px;
+
+    text-align:center;
 }
 
-/* =========================
+
+/* =====================================================
    MODAL
-========================= */
+===================================================== */
 
 .modal{
     position:fixed;
+
     inset:0;
+
     z-index:9000;
+
     display:none;
+
     place-items:center;
+
     padding:20px;
-    background:rgba(84,40,60,.25);
+
+    background:
+        rgba(84,40,60,.25);
+
     backdrop-filter:blur(8px);
 }
 
@@ -1054,31 +1836,33 @@ section{
 
 .modal-box{
     width:min(500px,100%);
-    padding:35px;
-    border-radius:32px;
-    position:relative;
-    animation:modalIn .35s ease;
-}
 
-@keyframes modalIn{
-    from{
-        opacity:0;
-        transform:translateY(20px) scale(.95);
-    }
-    to{
-        opacity:1;
-        transform:none;
-    }
+    padding:35px;
+
+    border-radius:32px;
+
+    position:relative;
+
+    animation:
+        modalIn
+        .35s
+        ease;
 }
 
 .modal-close{
     position:absolute;
-    right:18px;
+
     top:13px;
+    right:18px;
+
     border:0;
+
     background:none;
+
     color:#9d526f;
+
     font-size:27px;
+
     cursor:pointer;
 }
 
@@ -1087,70 +1871,165 @@ section{
 }
 
 .modal h3{
-    font-family:"Playfair Display",serif;
-    color:#81334f;
-    font-size:32px;
     margin:12px 0;
+
+    color:#81334f;
+
+    font-family:"Playfair Display",serif;
+
+    font-size:32px;
 }
 
 .modal p{
     color:var(--muted);
+
     line-height:1.7;
 }
 
-/* =========================
-   REVEAL
-========================= */
+
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
 
 .reveal{
     opacity:0;
-    transform:translateY(35px);
-    transition:1s cubic-bezier(.2,.7,.2,1);
+
+    transform:
+        translateY(35px);
+
+    transition:
+        1s
+        cubic-bezier(.2,.7,.2,1);
 }
 
 .reveal.show{
     opacity:1;
+
     transform:none;
 }
 
-/* =========================
-   ANIMATIONS
-========================= */
+
+/* =====================================================
+   PETALS
+===================================================== */
+
+.petal{
+    position:fixed;
+
+    top:-30px;
+
+    z-index:5;
+
+    pointer-events:none;
+
+    opacity:.65;
+
+    animation:
+        petalFall
+        linear
+        forwards;
+}
+
+@keyframes petalFall{
+
+    0%{
+        transform:
+            translateY(-30px)
+            rotate(0);
+
+        opacity:0;
+    }
+
+    15%{
+        opacity:.7;
+    }
+
+    100%{
+        transform:
+            translateY(110vh)
+            translateX(80px)
+            rotate(420deg);
+
+        opacity:0;
+    }
+}
+
+
+/* =====================================================
+   GENERAL ANIMATIONS
+===================================================== */
 
 @keyframes float{
+
     0%,100%{
         transform:translateY(0);
     }
+
     50%{
         transform:translateY(-12px);
     }
 }
 
 @keyframes heartbeat{
+
     0%,100%{
         transform:scale(1);
     }
+
     50%{
         transform:scale(1.12);
     }
 }
 
 @keyframes pulseGlow{
+
     0%,100%{
         box-shadow:
-        0 15px 50px rgba(255,79,145,.18),
-        inset 0 0 0 8px #fff2f7;
+            0 15px 50px
+            rgba(255,79,145,.18),
+
+            inset 0 0 0 8px
+            #fff2f7;
     }
+
     50%{
         box-shadow:
-        0 15px 65px rgba(255,79,145,.35),
-        inset 0 0 0 8px #fff2f7;
+            0 15px 65px
+            rgba(255,79,145,.35),
+
+            inset 0 0 0 8px
+            #fff2f7;
     }
 }
 
-/* =========================
+@keyframes routeDash{
+
+    to{
+        stroke-dashoffset:-100;
+    }
+}
+
+@keyframes modalIn{
+
+    from{
+        opacity:0;
+
+        transform:
+            translateY(20px)
+            scale(.95);
+    }
+
+    to{
+        opacity:1;
+
+        transform:none;
+    }
+}
+
+
+/* =====================================================
    MOBILE
-========================= */
+===================================================== */
 
 @media(max-width:800px){
 
@@ -1158,12 +2037,16 @@ section{
         padding:75px 0;
     }
 
+
+    /* HERO */
+
     .hero{
         padding-top:115px;
     }
 
     .hero-grid{
         grid-template-columns:1fr;
+
         gap:40px;
     }
 
@@ -1175,69 +2058,186 @@ section{
         min-height:290px;
     }
 
-    .route-map{
-        height:330px;
-    }
 
-    .video-grid,
-    .option-grid{
-        grid-template-columns:1fr;
-    }
+    /* MESSAGE */
 
     .message-box{
         padding:35px 22px;
     }
 
-    .timeline:before{
+
+    /* MAP */
+
+    .route-map{
+        height:330px;
+    }
+
+
+    /* TIMELINE */
+
+    .timeline::before{
         left:24px;
     }
 
     .event{
-        grid-template-columns:49px 1fr;
+        grid-template-columns:
+            49px
+            1fr;
+
         gap:13px;
     }
 
     .event-icon{
         width:49px;
         height:49px;
+
         font-size:20px;
     }
 
+
+    /* VIDEOS */
+
+    .video-grid{
+        grid-template-columns:1fr;
+
+        gap:25px;
+    }
+
     .video-card{
+        padding:11px;
+
+        border-radius:28px;
+    }
+
+    .film-frame{
         padding:10px;
+
+        border-radius:22px;
+    }
+
+    .video-wrap{
+        width:100%;
+
+        aspect-ratio:16 / 9;
+
+        border-radius:15px;
+    }
+
+    .video-element{
+        width:100%;
+        height:100%;
+
+        object-fit:contain;
+    }
+
+    .big-play{
+        width:64px;
+        height:64px;
+
+        font-size:22px;
+    }
+
+    .video-info{
+        padding:
+            18px
+            6px
+            5px;
+    }
+
+    .video-info h3{
+        font-size:27px;
     }
 
     .controls{
-        gap:6px;
+        padding:7px;
+    }
+
+    .control-btn{
+        width:38px;
+        height:38px;
     }
 
     .time{
-        min-width:65px;
+        min-width:62px;
     }
+
+
+    /* OPTIONS */
+
+    .option-grid{
+        grid-template-columns:1fr;
+    }
+
+
+    /* FINAL */
 
     .final-box{
         padding:55px 20px;
     }
+
 }
+
+
+/* =====================================================
+   EXTRA SMALL PHONES
+===================================================== */
+
+@media(max-width:400px){
+
+    .hero h2{
+        font-size:50px;
+    }
+
+    .section-title{
+        font-size:35px;
+    }
+
+    .video-info h3{
+        font-size:25px;
+    }
+
+    .time{
+        min-width:55px;
+
+        font-size:9px;
+    }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
-<div class="page-progress" id="pageProgress"></div>
+
+<!-- =====================================================
+     PAGE PROGRESS
+===================================================== -->
+
+<div
+    class="page-progress"
+    id="pageProgress">
+</div>
 
 
-<!-- =========================
+<!-- =====================================================
      INTRO
-========================= -->
+===================================================== -->
 
-<div class="intro" id="intro">
+<div
+    class="intro"
+    id="intro">
 
     <div class="intro-inner">
 
-        <div class="intro-flower">🌸</div>
+        <div class="intro-flower">
+            🌸
+        </div>
 
-        <small>September 17 • Chennai</small>
+        <small>
+            September 17 • Chennai
+        </small>
 
         <h1>
             One Last<br>
@@ -1250,8 +2250,12 @@ section{
             in a little corner of the internet. 💗
         </p>
 
-        <button class="open-btn" onclick="openJourney()">
+        <button
+            class="open-btn"
+            onclick="openJourney()">
+
             Open Our Day ✨
+
         </button>
 
     </div>
@@ -1261,9 +2265,10 @@ section{
 
 <main>
 
-<!-- =========================
+
+<!-- =====================================================
      HERO
-========================= -->
+===================================================== -->
 
 <section class="hero">
 
@@ -1282,19 +2287,33 @@ section{
         </h2>
 
         <p class="hero-description">
-            From the first train in the morning to the final ride home,
-            every little stop has a story. Tomorrow may be the start
-            of a new chapter, but today deserves to be remembered.
+
+            From the first train in the morning
+            to the final ride home,
+            every little stop has a story.
+
+            Tomorrow may be the start of
+            a new chapter, but today
+            deserves to be remembered.
+
         </p>
 
         <div class="hero-buttons">
 
-            <a href="#journey" class="hero-btn primary">
+            <a
+                href="#journey"
+                class="hero-btn primary">
+
                 Explore our journey ↓
+
             </a>
 
-            <a href="#videos" class="hero-btn">
+            <a
+                href="#videos"
+                class="hero-btn">
+
                 Our videos 🎬
+
             </a>
 
         </div>
@@ -1306,7 +2325,9 @@ section{
 
         <div class="hero-card-inner">
 
-            <div class="hero-heart">💗</div>
+            <div class="hero-heart">
+                💗
+            </div>
 
             <div class="hero-icon-circle">
                 🚆
@@ -1317,8 +2338,9 @@ section{
             </h3>
 
             <p>
-                Train rides • Cafe talks • Aerohub • Lunch •
-                Temple / Beach • Burma noodles • Final train
+                Train rides • Cafe talks •
+                Aerohub • Lunch • Temple / Beach •
+                Burma noodles • Final train
             </p>
 
         </div>
@@ -1330,9 +2352,9 @@ section{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      MESSAGE
-========================= -->
+===================================================== -->
 
 <section class="message">
 
@@ -1349,14 +2371,18 @@ section{
     <div class="message-box glass">
 
         <p>
+
             “Tomorrow isn't really goodbye.
             It's just the beginning of another chapter.
+
             Bangalore may get your next 45 days,
-            but Chennai will always have these memories.”
+            but Chennai will always have
+            these memories.”
+
         </p>
 
         <div class="signature">
-            Made with a lot of memories & a little bit of love 💗
+            Made with memories & a little bit of love 💗
         </div>
 
     </div>
@@ -1366,9 +2392,9 @@ section{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      JOURNEY MAP
-========================= -->
+===================================================== -->
 
 <section id="journey">
 
@@ -1385,7 +2411,8 @@ section{
         </h2>
 
         <p class="section-text">
-            Tap the glowing pins to discover what happens at each stop.
+            Tap the glowing pins to discover
+            what happens at each stop.
         </p>
 
     </div>
@@ -1399,23 +2426,46 @@ section{
                 CHENNAI • OUR MEMORY ROUTE
             </div>
 
+
             <svg
                 class="route-svg"
                 viewBox="0 0 900 430"
                 preserveAspectRatio="none">
 
+
                 <path
                     class="route-line"
                     d="
                     M65 340
-                    C125 320 120 275 185 250
-                    C250 225 245 175 315 155
-                    C390 135 400 100 475 120
-                    C545 140 545 205 610 205
-                    C680 205 690 260 750 255
-                    C805 250 815 315 850 330
+
+                    C125 320
+                    120 275
+                    185 250
+
+                    C250 225
+                    245 175
+                    315 155
+
+                    C390 135
+                    400 100
+                    475 120
+
+                    C545 140
+                    545 205
+                    610 205
+
+                    C680 205
+                    690 260
+                    750 255
+
+                    C805 250
+                    815 315
+                    850 330
                     "
                 />
+
+
+                <!-- MOVING DOT -->
 
                 <circle
                     r="9"
@@ -1442,13 +2492,19 @@ section{
 
                 <g
                     class="map-pin"
-                    onclick="showPlace(
+                    onclick="
+                    showPlace(
                     'Train Journey',
                     '🚆',
                     '8:00 AM — The day begins with the first train journey.'
-                    )">
+                    )
+                    ">
 
-                    <circle cx="65" cy="340" r="15" class="pin-circle"/>
+                    <circle
+                        cx="65"
+                        cy="340"
+                        r="15"
+                        class="pin-circle"/>
 
                     <text
                         x="43"
@@ -1464,13 +2520,19 @@ section{
 
                 <g
                     class="map-pin"
-                    onclick="showPlace(
+                    onclick="
+                    showPlace(
                     'Pallavaram',
                     '📍',
-                    '9:00–9:30 AM — Reaching Pallavaram and beginning our day together.'
-                    )">
+                    '9:00–9:30 AM — Reaching Pallavaram and beginning the day together.'
+                    )
+                    ">
 
-                    <circle cx="185" cy="250" r="15" class="pin-circle"/>
+                    <circle
+                        cx="185"
+                        cy="250"
+                        r="15"
+                        class="pin-circle"/>
 
                     <text
                         x="153"
@@ -1486,13 +2548,19 @@ section{
 
                 <g
                     class="map-pin"
-                    onclick="showPlace(
+                    onclick="
+                    showPlace(
                     'Relax Cafe',
                     '☕',
                     '9:35–10:30 AM — Cafe time, conversations, laughter and beautiful moments.'
-                    )">
+                    )
+                    ">
 
-                    <circle cx="315" cy="155" r="15" class="pin-circle"/>
+                    <circle
+                        cx="315"
+                        cy="155"
+                        r="15"
+                        class="pin-circle"/>
 
                     <text
                         x="287"
@@ -1508,13 +2576,19 @@ section{
 
                 <g
                     class="map-pin"
-                    onclick="showPlace(
+                    onclick="
+                    showPlace(
                     'Aerohub Mall',
                     '🏬',
                     '11:30 AM–1:00 PM — Exploring Aerohub and making more memories.'
-                    )">
+                    )
+                    ">
 
-                    <circle cx="475" cy="120" r="15" class="pin-circle"/>
+                    <circle
+                        cx="475"
+                        cy="120"
+                        r="15"
+                        class="pin-circle"/>
 
                     <text
                         x="447"
@@ -1530,13 +2604,19 @@ section{
 
                 <g
                     class="map-pin"
-                    onclick="showPlace(
+                    onclick="
+                    showPlace(
                     'Sangeetha',
                     '🍛',
                     '2:10–2:50 PM — Lunch and another little pause in the journey.'
-                    )">
+                    )
+                    ">
 
-                    <circle cx="610" cy="205" r="15" class="pin-circle"/>
+                    <circle
+                        cx="610"
+                        cy="205"
+                        r="15"
+                        class="pin-circle"/>
 
                     <text
                         x="592"
@@ -1548,17 +2628,23 @@ section{
                 </g>
 
 
-                <!-- CHOICE -->
+                <!-- AFTERNOON -->
 
                 <g
                     class="map-pin"
-                    onclick="showPlace(
+                    onclick="
+                    showPlace(
                     'Afternoon Choice',
                     '🌸',
                     'Around 4:00 PM — Sai Baba Temple, Mylapore OR Marina Beach.'
-                    )">
+                    )
+                    ">
 
-                    <circle cx="750" cy="255" r="15" class="pin-circle"/>
+                    <circle
+                        cx="750"
+                        cy="255"
+                        r="15"
+                        class="pin-circle"/>
 
                     <text
                         x="718"
@@ -1574,13 +2660,19 @@ section{
 
                 <g
                     class="map-pin"
-                    onclick="showPlace(
+                    onclick="
+                    showPlace(
                     'Chennai Fort',
                     '🌃',
                     'Evening — heading towards Fort for the final part of the day.'
-                    )">
+                    )
+                    ">
 
-                    <circle cx="850" cy="330" r="15" class="pin-circle"/>
+                    <circle
+                        cx="850"
+                        cy="330"
+                        r="15"
+                        class="pin-circle"/>
 
                     <text
                         x="827"
@@ -1590,6 +2682,7 @@ section{
                     </text>
 
                 </g>
+
 
             </svg>
 
@@ -1606,9 +2699,9 @@ section{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      TIMELINE
-========================= -->
+===================================================== -->
 
 <section>
 
@@ -1632,7 +2725,9 @@ section{
 
         <div class="event reveal">
 
-            <div class="event-icon">🚆</div>
+            <div class="event-icon">
+                🚆
+            </div>
 
             <div class="event-card glass">
 
@@ -1645,7 +2740,8 @@ section{
                 </div>
 
                 <div class="event-description">
-                    The first train ride of our little Chennai adventure.
+                    The first train ride of our little
+                    Chennai adventure.
                 </div>
 
             </div>
@@ -1655,7 +2751,9 @@ section{
 
         <div class="event reveal">
 
-            <div class="event-icon">📍</div>
+            <div class="event-icon">
+                📍
+            </div>
 
             <div class="event-card glass">
 
@@ -1668,7 +2766,8 @@ section{
                 </div>
 
                 <div class="event-description">
-                    Reaching Pallavaram and starting the day together.
+                    Reaching Pallavaram and
+                    starting the day together.
                 </div>
 
             </div>
@@ -1678,7 +2777,9 @@ section{
 
         <div class="event reveal">
 
-            <div class="event-icon">☕</div>
+            <div class="event-icon">
+                ☕
+            </div>
 
             <div class="event-card glass">
 
@@ -1691,8 +2792,8 @@ section{
                 </div>
 
                 <div class="event-description">
-                    Coffee, conversations, laughter and the moments
-                    that somehow become the best memories.
+                    Coffee, conversations, laughter
+                    and beautiful little moments.
                 </div>
 
             </div>
@@ -1702,7 +2803,9 @@ section{
 
         <div class="event reveal">
 
-            <div class="event-icon">🚉</div>
+            <div class="event-icon">
+                🚉
+            </div>
 
             <div class="event-card glass">
 
@@ -1715,7 +2818,8 @@ section{
                 </div>
 
                 <div class="event-description">
-                    Another train ride before the next chapter.
+                    Another train ride before
+                    the next adventure.
                 </div>
 
             </div>
@@ -1725,7 +2829,9 @@ section{
 
         <div class="event reveal">
 
-            <div class="event-icon">🏬</div>
+            <div class="event-icon">
+                🏬
+            </div>
 
             <div class="event-card glass">
 
@@ -1738,8 +2844,8 @@ section{
                 </div>
 
                 <div class="event-description">
-                    Exploring, walking around and collecting
-                    another set of memories.
+                    Exploring, walking around and
+                    collecting another chapter.
                 </div>
 
             </div>
@@ -1749,7 +2855,9 @@ section{
 
         <div class="event reveal">
 
-            <div class="event-icon">🚆</div>
+            <div class="event-icon">
+                🚆
+            </div>
 
             <div class="event-card glass">
 
@@ -1762,7 +2870,8 @@ section{
                 </div>
 
                 <div class="event-description">
-                    Catching the train and continuing the journey.
+                    Catching the train and continuing
+                    the Chennai journey.
                 </div>
 
             </div>
@@ -1772,7 +2881,9 @@ section{
 
         <div class="event reveal">
 
-            <div class="event-icon">🍛</div>
+            <div class="event-icon">
+                🍛
+            </div>
 
             <div class="event-card glass">
 
@@ -1785,7 +2896,8 @@ section{
                 </div>
 
                 <div class="event-description">
-                    Food, conversations and a little recharge.
+                    Food, conversations and
+                    a little recharge.
                 </div>
 
             </div>
@@ -1795,7 +2907,9 @@ section{
 
         <div class="event reveal">
 
-            <div class="event-icon">🚌</div>
+            <div class="event-icon">
+                🚌
+            </div>
 
             <div class="event-card glass">
 
@@ -1808,7 +2922,8 @@ section{
                 </div>
 
                 <div class="event-description">
-                    Catch the next bus towards the afternoon chapter.
+                    Catch the next bus towards
+                    the afternoon chapter.
                 </div>
 
             </div>
@@ -1818,7 +2933,9 @@ section{
 
         <div class="event reveal">
 
-            <div class="event-icon">🌸</div>
+            <div class="event-icon">
+                🌸
+            </div>
 
             <div class="event-card glass">
 
@@ -1831,8 +2948,8 @@ section{
                 </div>
 
                 <div class="event-description">
-                    Sai Baba Temple, Mylapore or Marina Beach.
-                    Two possible ways to make the afternoon memorable.
+                    Sai Baba Temple, Mylapore
+                    or Marina Beach.
                 </div>
 
             </div>
@@ -1842,7 +2959,9 @@ section{
 
         <div class="event reveal">
 
-            <div class="event-icon">🌆</div>
+            <div class="event-icon">
+                🌆
+            </div>
 
             <div class="event-card glass">
 
@@ -1855,8 +2974,8 @@ section{
                 </div>
 
                 <div class="event-description">
-                    Leaving the afternoon behind and entering
-                    the final evening chapter.
+                    Entering the final evening
+                    chapter.
                 </div>
 
             </div>
@@ -1866,7 +2985,9 @@ section{
 
         <div class="event reveal">
 
-            <div class="event-icon">🍜</div>
+            <div class="event-icon">
+                🍜
+            </div>
 
             <div class="event-card glass">
 
@@ -1879,7 +3000,8 @@ section{
                 </div>
 
                 <div class="event-description">
-                    One final food stop before the last train ride.
+                    One final food stop before
+                    the last train ride.
                 </div>
 
             </div>
@@ -1889,7 +3011,9 @@ section{
 
         <div class="event reveal">
 
-            <div class="event-icon">🚆</div>
+            <div class="event-icon">
+                🚆
+            </div>
 
             <div class="event-card glass">
 
@@ -1912,7 +3036,9 @@ section{
 
         <div class="event reveal">
 
-            <div class="event-icon">🚌</div>
+            <div class="event-icon">
+                🚌
+            </div>
 
             <div class="event-card glass">
 
@@ -1925,8 +3051,9 @@ section{
                 </div>
 
                 <div class="event-description">
-                    Walk to Park bus station, catch the bus
-                    and reach Medavakkam Tank around 8:30 PM.
+                    Walk to Park bus station,
+                    catch the bus and reach
+                    Medavakkam Tank around 8:30 PM.
                 </div>
 
             </div>
@@ -1941,28 +3068,36 @@ section{
 </section>
 
 
-<!-- =========================
-     TWO VIDEOS
-========================= -->
+<!-- =====================================================
+     VIDEO SECTION
+===================================================== -->
 
 <section id="videos">
 
 <div class="container">
 
-    <div class="reveal">
+
+    <div class="video-intro reveal">
+
+        <div class="video-floating-heart">
+            ♡
+        </div>
 
         <div class="section-label">
-            Our memories
+            🎬 Our little films
         </div>
 
         <h2 class="section-title">
-            Two videos.<br>
-            One beautiful day.
+            Two tiny pieces<br>
+            of one beautiful day
         </h2>
 
         <p class="section-text">
-            Add your two videos below. Each memory has its own
-            cinematic frame, controls and changing quotes.
+            Some moments are better watched
+            than explained.
+
+            So here are two little memories
+            to keep. 💗
         </p>
 
     </div>
@@ -1971,7 +3106,9 @@ section{
     <div class="video-grid">
 
 
-        <!-- VIDEO 1 -->
+        <!-- =================================================
+             VIDEO 1
+        ================================================== -->
 
         <div class="video-card glass reveal">
 
@@ -1989,12 +3126,17 @@ section{
                             src="our-memory-1.mp4"
                             type="video/mp4">
 
+                        Your browser does not support video.
+
                     </video>
 
+
                     <div class="video-overlay">
+
                         <div class="big-play">
                             ▶
                         </div>
+
                     </div>
 
                 </div>
@@ -2013,12 +3155,18 @@ section{
                 </h3>
 
                 <p>
-                    The first little collection of moments
-                    from our Chennai day.
+                    The first little collection
+                    of moments from our Chennai day.
                 </p>
 
-                <div class="quote" id="quote1">
-                    “Some ordinary moments become extraordinary memories.”
+
+                <div
+                    class="quote"
+                    id="quote1">
+
+                    “Some ordinary moments
+                    become extraordinary memories.”
+
                 </div>
 
 
@@ -2027,15 +3175,31 @@ section{
                     <button
                         class="control-btn"
                         id="play1"
-                        onclick="toggleVideo('video1','play1')">
+                        onclick="
+                        toggleVideo(
+                            'video1',
+                            'play1'
+                        )
+                        ">
+
                         ▶
+
                     </button>
+
 
                     <button
                         class="control-btn"
-                        onclick="stopVideo('video1','play1')">
+                        onclick="
+                        stopVideo(
+                            'video1',
+                            'play1'
+                        )
+                        ">
+
                         ⏹
+
                     </button>
+
 
                     <input
                         class="progress-video"
@@ -2043,12 +3207,16 @@ section{
                         type="range"
                         min="0"
                         max="100"
-                        value="0">
+                        value="0"
+                        step=".1">
+
 
                     <div
                         class="time"
                         id="time1">
+
                         0:00 / 0:00
+
                     </div>
 
                 </div>
@@ -2058,7 +3226,9 @@ section{
         </div>
 
 
-        <!-- VIDEO 2 -->
+        <!-- =================================================
+             VIDEO 2
+        ================================================== -->
 
         <div class="video-card glass reveal">
 
@@ -2076,12 +3246,17 @@ section{
                             src="our-memory-2.mp4"
                             type="video/mp4">
 
+                        Your browser does not support video.
+
                     </video>
 
+
                     <div class="video-overlay">
+
                         <div class="big-play">
                             ▶
                         </div>
+
                     </div>
 
                 </div>
@@ -2104,8 +3279,14 @@ section{
                     everything this day means.
                 </p>
 
-                <div class="quote" id="quote2">
-                    “Distance changes places, not the memories we keep.”
+
+                <div
+                    class="quote"
+                    id="quote2">
+
+                    “Distance changes places,
+                    not the memories we keep.”
+
                 </div>
 
 
@@ -2114,15 +3295,31 @@ section{
                     <button
                         class="control-btn"
                         id="play2"
-                        onclick="toggleVideo('video2','play2')">
+                        onclick="
+                        toggleVideo(
+                            'video2',
+                            'play2'
+                        )
+                        ">
+
                         ▶
+
                     </button>
+
 
                     <button
                         class="control-btn"
-                        onclick="stopVideo('video2','play2')">
+                        onclick="
+                        stopVideo(
+                            'video2',
+                            'play2'
+                        )
+                        ">
+
                         ⏹
+
                     </button>
+
 
                     <input
                         class="progress-video"
@@ -2130,12 +3327,16 @@ section{
                         type="range"
                         min="0"
                         max="100"
-                        value="0">
+                        value="0"
+                        step=".1">
+
 
                     <div
                         class="time"
                         id="time2">
+
                         0:00 / 0:00
+
                     </div>
 
                 </div>
@@ -2152,9 +3353,9 @@ section{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      AFTERNOON CHOICE
-========================= -->
+===================================================== -->
 
 <section>
 
@@ -2171,7 +3372,7 @@ section{
         </h2>
 
         <p class="section-text">
-            Tap a card. It will glow when selected.
+            Tap a card. It will glow when selected. 💗
         </p>
 
     </div>
@@ -2180,9 +3381,16 @@ section{
     <div class="option-grid">
 
 
+        <!-- OPTION A -->
+
         <div
             class="option glass reveal"
-            onclick="selectOption(this,'Sai Baba Temple')">
+            onclick="
+            selectOption(
+                this,
+                'Sai Baba Temple'
+            )
+            ">
 
             <div class="option-icon">
                 🙏
@@ -2205,9 +3413,16 @@ section{
         </div>
 
 
+        <!-- OPTION B -->
+
         <div
             class="option glass reveal"
-            onclick="selectOption(this,'Marina Beach')">
+            onclick="
+            selectOption(
+                this,
+                'Marina Beach'
+            )
+            ">
 
             <div class="option-icon">
                 🌊
@@ -2237,9 +3452,9 @@ section{
 </section>
 
 
-<!-- =========================
-     MEMORY RANDOMIZER
-========================= -->
+<!-- =====================================================
+     MEMORY MACHINE
+===================================================== -->
 
 <section class="memory-section">
 
@@ -2254,7 +3469,10 @@ section{
     </h2>
 
     <p class="section-text" style="margin:auto">
-        Every click reveals another little thought.
+
+        Every click reveals
+        another little thought.
+
     </p>
 
 
@@ -2265,16 +3483,25 @@ section{
         <div
             class="memory-emoji"
             id="memoryEmoji">
+
             ☕
+
         </div>
 
+
         <h3 id="memoryTitle">
+
             Cafe conversations
+
         </h3>
 
+
         <p id="memoryText">
-            Sometimes the best part of meeting someone
-            is simply sitting together and talking.
+
+            Sometimes the best part
+            of meeting someone is simply
+            sitting together and talking.
+
         </p>
 
     </div>
@@ -2293,9 +3520,9 @@ section{
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      FINAL
-========================= -->
+===================================================== -->
 
 <section class="final">
 
@@ -2313,6 +3540,7 @@ section{
                 Until the next chapter
             </div>
 
+
             <h2>
                 Bangalore is waiting.<br>
                 Chennai will remember.
@@ -2321,7 +3549,9 @@ section{
 
             <div class="days">
 
-                <span>⏳</span>
+                <span>
+                    ⏳
+                </span>
 
                 <strong>
                     45
@@ -2336,7 +3566,9 @@ section{
 
             <p>
 
-                Go chase the experience waiting for you.
+                Go chase the experience
+                waiting for you.
+
                 Learn something new.
                 Meet new people.
                 Make beautiful memories.
@@ -2350,8 +3582,12 @@ section{
                 <br><br>
 
                 <strong style="color:#81334f">
+
                     This isn't goodbye, Nidhu.
-                    It's just “see you after the next chapter.” 💗
+
+                    It's just
+                    “see you after the next chapter.” 💗
+
                 </strong>
 
             </p>
@@ -2366,15 +3602,19 @@ section{
 
 
 <div class="footer">
-    Made with memories • Chennai → Bangalore 🌸
+
+    Made with memories •
+    Chennai → Bangalore 🌸
+
 </div>
+
 
 </main>
 
 
-<!-- =========================
+<!-- =====================================================
      MODAL
-========================= -->
+===================================================== -->
 
 <div
     class="modal"
@@ -2385,18 +3625,25 @@ section{
         <button
             class="modal-close"
             onclick="closeModal()">
+
             ×
+
         </button>
+
 
         <div
             class="modal-icon"
             id="modalIcon">
+
             📍
+
         </div>
+
 
         <h3 id="modalTitle">
             Destination
         </h3>
+
 
         <p id="modalText"></p>
 
@@ -2407,63 +3654,91 @@ section{
 
 <script>
 
-/* =========================
-   OPEN INTRO
-========================= */
+/* =====================================================
+   INTRO
+===================================================== */
 
 function openJourney(){
 
     document
         .getElementById("intro")
-        .classList.add("hide");
+        .classList
+        .add("hide");
 
     createPetals();
 
 }
 
 
-/* =========================
+/* =====================================================
    FLOATING PETALS
-========================= */
+===================================================== */
 
-const petals=[
+const petals = [
+
     "🌸",
     "💗",
     "✨",
     "🌷",
     "💕",
     "✦"
+
 ];
+
 
 function createPetals(){
 
     setInterval(()=>{
 
-        const petal=
+        const petal =
             document.createElement("div");
 
-        petal.className="petal";
+        petal.className =
+            "petal";
 
-        petal.innerText=
+        petal.innerText =
             petals[
                 Math.floor(
-                    Math.random()*petals.length
+                    Math.random()
+                    *
+                    petals.length
                 )
             ];
 
-        petal.style.left=
-            Math.random()*100+"vw";
+        petal.style.left =
+            Math.random()
+            *
+            100
+            +
+            "vw";
 
-        petal.style.fontSize=
-            (8+Math.random()*15)+"px";
+        petal.style.fontSize =
+            (
+                8
+                +
+                Math.random()*15
+            )
+            +
+            "px";
 
-        petal.style.animationDuration=
-            (5+Math.random()*7)+"s";
+        petal.style.animationDuration =
+            (
+                5
+                +
+                Math.random()*7
+            )
+            +
+            "s";
 
-        document.body.appendChild(petal);
+        document
+            .body
+            .appendChild(petal);
+
 
         setTimeout(()=>{
+
             petal.remove();
+
         },13000);
 
     },550);
@@ -2471,54 +3746,63 @@ function createPetals(){
 }
 
 
-/* =========================
-   SCROLL PROGRESS
-========================= */
+/* =====================================================
+   PAGE SCROLL PROGRESS
+===================================================== */
 
-window.addEventListener("scroll",()=>{
+window.addEventListener(
+    "scroll",
+    ()=>{
 
-    const top=
-        window.scrollY;
+        const top =
+            window.scrollY;
 
-    const total=
-        document.documentElement.scrollHeight-
-        window.innerHeight;
+        const total =
+            document.documentElement
+            .scrollHeight
+            -
+            window.innerHeight;
 
-    const percentage=
-        total>0
-        ?
-        (top/total)*100
-        :
-        0;
+        const percentage =
+            total > 0
+            ?
+            (top / total) * 100
+            :
+            0;
 
-    document
-        .getElementById("pageProgress")
-        .style.width=
-        percentage+"%";
+        document
+            .getElementById("pageProgress")
+            .style.width =
+            percentage + "%";
 
-});
+    }
+);
 
 
-/* =========================
+/* =====================================================
    SCROLL REVEAL
-========================= */
+===================================================== */
 
-const revealObserver=
+const revealObserver =
     new IntersectionObserver(
         entries=>{
 
-            entries.forEach(entry=>{
+            entries.forEach(
+                entry=>{
 
-                if(entry.isIntersecting){
+                    if(
+                        entry.isIntersecting
+                    ){
 
-                    entry
-                        .target
-                        .classList
-                        .add("show");
+                        entry
+                            .target
+                            .classList
+                            .add("show");
+
+                    }
 
                 }
-
-            });
+            );
 
         },
         {
@@ -2529,28 +3813,43 @@ const revealObserver=
 
 document
     .querySelectorAll(".reveal")
-    .forEach(el=>{
-        revealObserver.observe(el);
-    });
+    .forEach(
+        element=>{
+
+            revealObserver
+                .observe(element);
+
+        }
+    );
 
 
-/* =========================
+/* =====================================================
    DESTINATION MODAL
-========================= */
+===================================================== */
 
-function showPlace(title,icon,text){
+function showPlace(
+    title,
+    icon,
+    text
+){
 
     document
         .getElementById("modalTitle")
-        .innerText=title;
+        .innerText =
+        title;
+
 
     document
         .getElementById("modalIcon")
-        .innerText=icon;
+        .innerText =
+        icon;
+
 
     document
         .getElementById("modalText")
-        .innerText=text;
+        .innerText =
+        text;
+
 
     document
         .getElementById("modal")
@@ -2572,51 +3871,76 @@ function closeModal(){
 
 document
     .getElementById("modal")
-    .addEventListener("click",e=>{
+    .addEventListener(
+        "click",
+        event=>{
 
-        if(e.target.id==="modal"){
-            closeModal();
+            if(
+                event.target.id ===
+                "modal"
+            ){
+
+                closeModal();
+
+            }
+
         }
+    );
 
-    });
 
-
-/* =========================
+/* =====================================================
    AFTERNOON OPTION
-========================= */
+===================================================== */
 
-function selectOption(element,name){
+function selectOption(
+    element,
+    name
+){
 
     document
         .querySelectorAll(".option")
-        .forEach(card=>{
-            card.classList.remove("selected");
-        });
+        .forEach(
+            card=>{
 
-    element.classList.add("selected");
+                card
+                    .classList
+                    .remove("selected");
+
+            }
+        );
+
+
+    element
+        .classList
+        .add("selected");
+
 
     showPlace(
+
         name,
-        name==="Marina Beach"
+
+        name === "Marina Beach"
             ?
             "🌊"
             :
             "🙏",
-        name==="Marina Beach"
+
+        name === "Marina Beach"
             ?
             "Marina Beach — sea breeze, conversations and Chennai sunset vibes."
             :
             "Sai Baba Temple, Mylapore — a peaceful afternoon for blessings and new beginnings."
+
     );
 
 }
 
 
-/* =========================
-   RANDOM MEMORY
-========================= */
+/* =====================================================
+   RANDOM MEMORIES
+===================================================== */
 
-const memories=[
+const memories = [
 
     {
         emoji:"☕",
@@ -2671,80 +3995,121 @@ const memories=[
 
 function newMemory(){
 
-    const card=
-        document.getElementById("memoryCard");
+    const card =
+        document
+        .getElementById("memoryCard");
 
-    card.classList.remove("change");
+
+    card
+        .classList
+        .remove("change");
+
 
     void card.offsetWidth;
 
-    card.classList.add("change");
 
-    const memory=
+    card
+        .classList
+        .add("change");
+
+
+    const memory =
         memories[
             Math.floor(
-                Math.random()*memories.length
+                Math.random()
+                *
+                memories.length
             )
         ];
 
+
     document
         .getElementById("memoryEmoji")
-        .innerText=memory.emoji;
+        .innerText =
+        memory.emoji;
+
 
     document
         .getElementById("memoryTitle")
-        .innerText=memory.title;
+        .innerText =
+        memory.title;
+
 
     document
         .getElementById("memoryText")
-        .innerText=memory.text;
+        .innerText =
+        memory.text;
 
 }
 
 
-/* =========================
+/* =====================================================
    HEART CLICK EFFECT
-========================= */
+===================================================== */
 
-document.addEventListener("click",e=>{
+document.addEventListener(
+    "click",
+    event=>{
 
-    if(
-        e.target.tagName==="BUTTON" ||
-        e.target.closest("button") ||
-        e.target.closest("video")
-    ){
-        return;
+        if(
+            event.target.tagName ===
+            "BUTTON"
+            ||
+            event.target.closest("button")
+            ||
+            event.target.closest("video")
+        ){
+
+            return;
+
+        }
+
+
+        const heart =
+            document.createElement("div");
+
+
+        heart.className =
+            "click-heart";
+
+
+        heart.innerText =
+            Math.random() > .5
+            ?
+            "💗"
+            :
+            "💕";
+
+
+        heart.style.left =
+            event.clientX + "px";
+
+
+        heart.style.top =
+            event.clientY + "px";
+
+
+        document
+            .body
+            .appendChild(heart);
+
+
+        setTimeout(
+            ()=>{
+                heart.remove();
+            },
+            1000
+        );
+
     }
-
-    const heart=
-        document.createElement("div");
-
-    heart.className="click-heart";
-
-    heart.innerText=
-        Math.random()>.5
-        ?
-        "💗"
-        :
-        "💕";
-
-    heart.style.left=e.clientX+"px";
-    heart.style.top=e.clientY+"px";
-
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{
-        heart.remove();
-    },1000);
-
-});
+);
 
 
-/* =========================
-   VIDEO PLAYER
-========================= */
+/* =====================================================
+   VIDEO SYSTEM
+===================================================== */
 
-const quotes1=[
+const quotes1 = [
 
     "“Some ordinary moments become extraordinary memories.”",
 
@@ -2756,7 +4121,8 @@ const quotes1=[
 
 ];
 
-const quotes2=[
+
+const quotes2 = [
 
     "“Distance changes places, not the memories we keep.”",
 
@@ -2769,49 +4135,91 @@ const quotes2=[
 ];
 
 
+/* FORMAT TIME */
+
 function formatTime(seconds){
 
-    if(!isFinite(seconds)){
+    if(
+        !isFinite(seconds)
+    ){
+
         return "0:00";
+
     }
 
-    const minutes=
-        Math.floor(seconds/60);
 
-    const secs=
-        Math.floor(seconds%60)
+    const minutes =
+        Math.floor(
+            seconds / 60
+        );
+
+
+    const secs =
+        Math.floor(
+            seconds % 60
+        )
         .toString()
         .padStart(2,"0");
 
-    return minutes+":"+secs;
+
+    return (
+        minutes
+        +
+        ":"
+        +
+        secs
+    );
 
 }
 
 
-function toggleVideo(videoId,buttonId){
+/* TOGGLE PLAY */
 
-    const video=
-        document.getElementById(videoId);
+function toggleVideo(
+    videoId,
+    buttonId
+){
 
-    const button=
-        document.getElementById(buttonId);
+    const video =
+        document
+        .getElementById(videoId);
 
 
-    if(video.paused){
+    const button =
+        document
+        .getElementById(buttonId);
+
+
+    if(
+        video.paused
+    ){
+
+        /*
+           Pause the other video
+        */
 
         document
             .querySelectorAll(".video-element")
-            .forEach(other=>{
+            .forEach(
+                other=>{
 
-                if(other!==video){
-                    other.pause();
+                    if(
+                        other !== video
+                    ){
+
+                        other.pause();
+
+                    }
+
                 }
+            );
 
-            });
 
         video.play();
 
-    }else{
+    }
+
+    else{
 
         video.pause();
 
@@ -2820,136 +4228,218 @@ function toggleVideo(videoId,buttonId){
 }
 
 
-function stopVideo(videoId,buttonId){
+/* STOP */
 
-    const video=
-        document.getElementById(videoId);
+function stopVideo(
+    videoId,
+    buttonId
+){
+
+    const video =
+        document
+        .getElementById(videoId);
+
 
     video.pause();
 
-    video.currentTime=0;
+
+    video.currentTime =
+        0;
 
 }
 
 
+/* SETUP VIDEO */
+
 function setupVideo(
+
     videoId,
+
     buttonId,
+
     progressId,
+
     timeId,
+
     quoteId,
+
     quotes
+
 ){
 
-    const video=
-        document.getElementById(videoId);
+    const video =
+        document
+        .getElementById(videoId);
 
-    const button=
-        document.getElementById(buttonId);
 
-    const progress=
-        document.getElementById(progressId);
+    const button =
+        document
+        .getElementById(buttonId);
 
-    const time=
-        document.getElementById(timeId);
 
-    const quote=
-        document.getElementById(quoteId);
+    const progress =
+        document
+        .getElementById(progressId);
 
+
+    const time =
+        document
+        .getElementById(timeId);
+
+
+    const quote =
+        document
+        .getElementById(quoteId);
+
+
+    /* Metadata */
 
     video.addEventListener(
         "loadedmetadata",
         ()=>{
 
-            time.innerText=
+            time.innerText =
                 "0:00 / "
                 +
-                formatTime(video.duration);
+                formatTime(
+                    video.duration
+                );
 
         }
     );
 
 
+    /* Time update */
+
     video.addEventListener(
         "timeupdate",
         ()=>{
 
-            if(!video.duration){
+            if(
+                !video.duration
+            ){
+
                 return;
+
             }
 
-            progress.value=
-                (video.currentTime/video.duration)*100;
 
-            time.innerText=
-                formatTime(video.currentTime)
+            progress.value =
+                (
+                    video.currentTime
+                    /
+                    video.duration
+                )
+                *
+                100;
+
+
+            time.innerText =
+                formatTime(
+                    video.currentTime
+                )
                 +
                 " / "
                 +
-                formatTime(video.duration);
-
-
-            const index=
-                Math.min(
-                    quotes.length-1,
-                    Math.floor(
-                        (video.currentTime/video.duration)
-                        *
-                        quotes.length
-                    )
+                formatTime(
+                    video.duration
                 );
 
-            quote.innerText=
+
+            const index =
+                Math.min(
+
+                    quotes.length - 1,
+
+                    Math.floor(
+
+                        (
+                            video.currentTime
+                            /
+                            video.duration
+                        )
+                        *
+                        quotes.length
+
+                    )
+
+                );
+
+
+            quote.innerText =
                 quotes[index];
 
         }
     );
 
 
+    /* PLAY */
+
     video.addEventListener(
         "play",
         ()=>{
 
-            button.innerText="❚❚";
+            button.innerText =
+                "❚❚";
 
-            video.classList.add("playing");
+            video
+                .classList
+                .add("playing");
 
         }
     );
 
+
+    /* PAUSE */
 
     video.addEventListener(
         "pause",
         ()=>{
 
-            button.innerText="▶";
+            button.innerText =
+                "▶";
 
-            video.classList.remove("playing");
+            video
+                .classList
+                .remove("playing");
 
         }
     );
 
+
+    /* END */
 
     video.addEventListener(
         "ended",
         ()=>{
 
-            button.innerText="▶";
+            button.innerText =
+                "▶";
 
-            video.classList.remove("playing");
+            video
+                .classList
+                .remove("playing");
 
         }
     );
 
 
+    /* SEEK */
+
     progress.addEventListener(
         "input",
         ()=>{
 
-            if(video.duration){
+            if(
+                video.duration
+            ){
 
-                video.currentTime=
-                    (progress.value/100)
+                video.currentTime =
+                    (
+                        progress.value
+                        /
+                        100
+                    )
                     *
                     video.duration;
 
@@ -2959,14 +4449,24 @@ function setupVideo(
     );
 
 
+    /* CLICK VIDEO */
+
     video.addEventListener(
         "click",
         ()=>{
 
-            if(video.paused){
+            if(
+                video.paused
+            ){
+
                 video.play();
-            }else{
+
+            }
+
+            else{
+
                 video.pause();
+
             }
 
         }
@@ -2975,29 +4475,47 @@ function setupVideo(
 }
 
 
+/* INITIALIZE VIDEO 1 */
+
 setupVideo(
+
     "video1",
+
     "play1",
+
     "progress1",
+
     "time1",
+
     "quote1",
+
     quotes1
+
 );
 
+
+/* INITIALIZE VIDEO 2 */
 
 setupVideo(
+
     "video2",
+
     "play2",
+
     "progress2",
+
     "time2",
+
     "quote2",
+
     quotes2
+
 );
 
 
-/* =========================
+/* =====================================================
    START PETALS
-========================= */
+===================================================== */
 
 setTimeout(
     createPetals,
